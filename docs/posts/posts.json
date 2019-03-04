@@ -1,0 +1,17 @@
+[
+  {
+    "path": "posts/welcome/",
+    "title": "Welcome to Teresa's Blog",
+    "description": "Welcome to our new blog, Teresa's Blog. We hope you enjoy \nreading what we have to say!",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-04",
+    "categories": [],
+    "preview": {},
+    "last_modified": "2019-03-04T12:24:59-08:00"
+  }
+]
