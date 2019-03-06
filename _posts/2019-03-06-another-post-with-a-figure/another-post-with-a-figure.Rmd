@@ -1,0 +1,29 @@
+---
+title: "another post with a figure"
+description: |
+  A short description of the post.
+author:
+  - name: Teresa Chen
+    url: https://teresashchen.netlify.com/
+date: 03-06-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = FALSE)
+
+```
+
+```{r}
+str(iris)
+
+iris %>% 
+  ggplot(aes(x = Sepal.Length, y = Sepal.Width)) +
+    geom_point(aes(color = Species)) +
+    geom_smooth()
+
+```
+

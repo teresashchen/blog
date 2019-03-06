@@ -15,6 +15,21 @@
     "last_modified": "2019-03-06T10:51:37-08:00"
   },
   {
+    "path": "posts/2019-03-06-another-post-with-a-figure/",
+    "title": "another post with a figure",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-06",
+    "categories": [],
+    "preview": "posts/2019-03-06-another-post-with-a-figure/another-post-with-a-figure_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2019-03-06T10:57:39-08:00"
+  },
+  {
     "path": "posts/2019-03-06-in-class-practice/",
     "title": "in-class practice",
     "description": "This is another test.",
