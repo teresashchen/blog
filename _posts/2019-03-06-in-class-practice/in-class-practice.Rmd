@@ -1,0 +1,18 @@
+---
+title: "in-class practice"
+description: |
+  This is another test.
+author:
+  - name: Teresa Chen
+    url: https://teresashchen.netlify.com/
+date: 03-06-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Hello, world!
