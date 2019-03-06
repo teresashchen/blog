@@ -1,5 +1,20 @@
 [
   {
+    "path": "posts/2019-03-06-another-in-class-test/",
+    "title": "another in-class test",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-06",
+    "categories": [],
+    "preview": "posts/2019-03-06-another-in-class-test/another-in-class-test_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2019-03-06T10:51:37-08:00"
+  },
+  {
     "path": "posts/2019-03-06-in-class-practice/",
     "title": "in-class practice",
     "description": "This is another test.",
