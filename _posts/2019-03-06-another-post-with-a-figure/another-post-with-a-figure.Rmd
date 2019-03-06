@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```
 
-```{r}
+```{r plot1, layout = "l-body-outset"}
 str(iris)
 
 iris %>% 
@@ -30,4 +30,16 @@ iris %>%
     geom_smooth()
 
 ```
+
+
+<aside>
+
+```{r}
+
+ggplot(mtcars, aes(mpg)) +
+  geom_histogram() +
+  labs(title = "Distribution of Miles Per Gallon")
+```
+
+</aside>
 
