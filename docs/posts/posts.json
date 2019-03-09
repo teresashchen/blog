@@ -1,5 +1,20 @@
 [
   {
+    "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",
+    "title": "Cause of Death- {gganimate} with a Bar Graph",
+    "description": "This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-08",
+    "categories": [],
+    "preview": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png",
+    "last_modified": "2019-03-08T22:37:15-08:00"
+  },
+  {
     "path": "posts/2019-03-06-another-in-class-test/",
     "title": "another in-class test",
     "description": "A short description of the post.",
@@ -30,7 +45,7 @@
       "class"
     ],
     "preview": "posts/2019-03-06-another-post-with-a-figure/another-post-with-a-figure_files/figure-html5/plot1-1.png",
-    "last_modified": "2019-03-06T11:21:44-08:00"
+    "last_modified": "2019-03-06T11:21:46-08:00"
   },
   {
     "path": "posts/2019-03-06-in-class-practice/",

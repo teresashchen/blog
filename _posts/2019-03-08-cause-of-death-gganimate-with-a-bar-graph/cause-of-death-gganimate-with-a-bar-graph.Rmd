@@ -1,0 +1,178 @@
+---
+title: "Cause of Death- {gganimate} with a Bar Graph"
+description: |
+  This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). 
+author:
+  - name: Teresa Chen
+    url: https://teresashchen.netlify.com/
+date: 03-08-2019
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+ 
+The dataset, called “Leading Causes of Death: United States” was published by [Centers for Disease Control and Prevention](https://www.data.gov/). The data presents age-adjusted death rates for 10 leading causes of death in the United States from 1999 to 2016. According to the [publisher](https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013), the data are based on the information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics.
+
+
+The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
+
+Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
+Q2. What are changing patterns of each leading cause of death over years?  
+Q3. What are distinct causes of death in each state of the United States?  
+
+
+This post presents the first part of the project, in which data visualization for Q1 is shown along with steps leading to the final plot.  
+
+First, required packages are as follows:  
+
+```{r required-package, echo=TRUE, eval=FALSE}
+
+install.packages("rio")
+install.packages("here")
+install.packages("tidyverse")
+install.packages("gganimate")
+install.packages("paletteer")
+install.packages("maps")
+install.packages("transformr")
+install.packages("skimr")
+install.packages("janitor")
+
+```
+
+Second, load packages and set up the global settings:  
+
+```{r setup, echo=TRUE}
+
+library(tidyverse)
+library(rio)
+library(here)
+library(gganimate)
+library(paletteer)
+library(maps)
+library(skimr)
+library(janitor)
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+
+## Data preparation 
+
+Import data with clean variable names and name it as `df`. 
+
+```{r importdata}
+
+df <- import(here::here("data", "Leading_Causes_of_Death__United_States.csv"),
+              setclass = "tbl_df") %>% 
+  janitor::clean_names()
+
+str(df)
+```
+
+## Data overview
+
+The original dataset contains 6 variables, including `r colnames(df)`. Before visiualizing data, I always find useful to clean dataset and do the following steps:  
+
+1. `dplyr::select` useful variables  
+  
+2. `dplyr::mutate` variable types accordingly, including using `forcat::as.factor`, and
+change value names or transform data value if necessary.  
+  
+3. `dplyr::filter` to keep useful observation
+
+```{r tidydf}
+
+
+tidy_df <- df %>% 
+  dplyr::select(year, cause_name, state, deaths, age_adjusted_death_rate) %>%   
+  mutate(cause = as_factor(cause_name),
+         state = as_factor(state),
+         
+         #transform rate to decimal value not %
+         rate = age_adjusted_death_rate/100) %>%   
+  dplyr::select(year, state, cause, deaths, rate) %>% 
+  
+  # filter out "all causes"
+  filter(cause != "All causes",
+         state != "United States") %>% 
+  
+  # replace "CLRD" with its whole name
+  mutate(cause = replace(as.character(cause), cause == "CLRD", 
+                         "Chronic lower respiratory diseases"))
+
+skim(tidy_df)
+```
+
+## Summary of data
+
+1. No missing data.  
+2. There are `r length(unique(tidy_df$cause))` causes of death, including 
+`r unique(tidy_df$cause)`.
+3. There are `r length(unique(tidy_df$state))` states. 
+4. Dataframe has data from 1999 to 2016 (`r 2016-1999+1` years).
+
+## First plot
+
+The first plot is intended to deliver a message to **general population** and to answer *how leading death causes change over years*.  
+
+```{r plot1_v1, fig.width=15, fig.height=20, layout = "l-body-outset"}
+
+plot1_v1 <- tidy_df %>% 
+  
+  # calculate yearly total deaths from all states
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>%
+  
+  # plot
+  ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
+             y = deaths_by_year_cause/1000000)) +
+    geom_col(fill = "steelblue",
+             alpha = 0.7) +
+    scale_y_continuous(expand = c(0, 0)) +
+    coord_flip() +
+    facet_wrap(~year, ncol = 3) +
+    theme_minimal(base_size = 20) +
+    theme(panel.grid.minor = element_blank(),
+          plot.title = element_text(face = "bold")) +
+    labs(y = "No. of deaths (in millions)",
+         x = "Causes of deaths",
+         title = "Heart disease is a leading cause of death over years",
+         caption = "Source: Centers for Disease Control and Prevention")
+         
+
+plot1_v1
+```
+
+
+```{r plot1_v1_r1, fig.width=15, fig.height=20, layout = "l-body-outset"}
+
+tidy_df %>% 
+  
+  # calculate yearly total deaths from all states
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>%
+  
+  # plot
+  ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
+             y = deaths_by_year_cause/1000000,
+             fill = cause)) +
+    geom_col(alpha = 0.7) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_brewer(palette = "BrBG") +
+    coord_flip() +
+    facet_wrap(~year, ncol = 3) +
+    theme_minimal(base_size = 20) +
+    theme(panel.grid.minor = element_blank(),
+          plot.title = element_text(face = "bold"),
+          legend.position = "none") +
+    labs(y = "No. of deaths (in millions)",
+         x = "Causes of deaths",
+         title = "Heart disease is a leading cause of death over years",
+         caption = "Source: Centers for Disease Control and Prevention")
+         
+
+```
+
