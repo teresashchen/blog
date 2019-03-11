@@ -90,15 +90,12 @@ tidy_df <- df %>%
   dplyr::select(year, cause_name, state, deaths, age_adjusted_death_rate) %>%   
   mutate(cause = as_factor(cause_name),
          state = as_factor(state),
-         
          #transform rate to decimal value not %
-         rate = age_adjusted_death_rate/100) %>%   
-  dplyr::select(year, state, cause, deaths, rate) %>% 
-  
+         rate = age_adjusted_death_rate/100) %>% 
+  dplyr::select(year, state, cause, deaths, rate) %>%
   # filter out "all causes"
   filter(cause != "All causes",
-         state != "United States") %>% 
-  
+         state != "United States") %>%
   # replace "CLRD" with its whole name
   mutate(cause = replace(as.character(cause), cause == "CLRD", 
                          "Chronic lower respiratory diseases"))
@@ -120,15 +117,13 @@ The first plot is intended to deliver a message to **general population** and to
 
 ```{r plot1_v1, fig.width=15, fig.height=20, layout = "l-body-outset"}
 
-plot1_v1 <- tidy_df %>% 
-  
+plot1_v1 <- tidy_df %>%
   # calculate yearly total deaths from all states
-  group_by(year, cause) %>% 
+  group_by(year, cause) %>%
   summarise(deaths_by_year_cause = sum(deaths)) %>%
-  
   # plot
   ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
-             y = deaths_by_year_cause/1000000)) +
+             y = deaths_by_year_cause/100000)) +
     geom_col(fill = "steelblue",
              alpha = 0.7) +
     scale_y_continuous(expand = c(0, 0)) +
@@ -137,7 +132,7 @@ plot1_v1 <- tidy_df %>%
     theme_minimal(base_size = 20) +
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = "bold")) +
-    labs(y = "No. of deaths (in millions)",
+    labs(y = "No. of deaths (in 100k)",
          x = "Causes of deaths",
          title = "Heart disease is a leading cause of death over years",
          caption = "Source: Centers for Disease Control and Prevention")
@@ -146,18 +141,21 @@ plot1_v1 <- tidy_df %>%
 plot1_v1
 ```
 
+From the graph it is easy to tell heart disease is shown to be a leading cause of death over years while cancer is a close number 2.
+
+One feedback from a peer reviewer is the single color on the chart. One palette I originally plan to use is `colorblindr::scale_fill_OkabeIto`, but it has only 8 colors while there are 10 causes of death to be plot. I end up using one of the diverging palette from [colorbrewer 2.0](http://colorbrewer2.org/#type=diverging&scheme=BrBG&n=10).
+
 
 ```{r plot1_v1_r1, fig.width=15, fig.height=20, layout = "l-body-outset"}
 
-tidy_df %>% 
   
+tidy_df %>%
   # calculate yearly total deaths from all states
-  group_by(year, cause) %>% 
+  group_by(year, cause) %>%
   summarise(deaths_by_year_cause = sum(deaths)) %>%
-  
   # plot
   ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
-             y = deaths_by_year_cause/1000000,
+             y = deaths_by_year_cause/100000,
              fill = cause)) +
     geom_col(alpha = 0.7) +
     scale_y_continuous(expand = c(0, 0)) +
@@ -168,11 +166,83 @@ tidy_df %>%
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = "bold"),
           legend.position = "none") +
-    labs(y = "No. of deaths (in millions)",
+    labs(y = "No. of deaths (in 100k)",
          x = "Causes of deaths",
          title = "Heart disease is a leading cause of death over years",
          caption = "Source: Centers for Disease Control and Prevention")
          
 
+```
+
+Although the top 2 causes have a clear trend and rank over years, a total of 18 facets make it hard to compare amounts of death and ranks of causes across years. 
+
+
+```{r plot1_v2, layout = "l-body-outset"}
+
+plot1_v2 <- tidy_df %>% 
+  group_by(year, cause) %>%
+  summarise(deaths_by_year_cause = sum(deaths)) %>%
+  # plot
+  ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
+             y = deaths_by_year_cause/100000,
+             fill = cause)) +
+    geom_col(alpha = 0.7) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_brewer(palette = "BrBG") +
+    coord_flip() +
+    theme_minimal(base_size = 15) +
+    theme(panel.grid.minor = element_blank(),
+          plot.margin = margin(1, 0, 1, 0.3, "cm"),
+          legend.position = "none") +
+    transition_time(year) +
+    labs(title = "Top 10 Causes of Deaths",
+         subtitle = "Year: {round(frame_time)}",
+         caption = "Source: Centers for Disease Control and Prevention",
+         y = "No. of deaths (in 100k)",
+         x = "Causes of deaths")
+
+
+animate(plot1_v2, duration = 25,  
+                  nframes = 100, 
+                  end_pause = 10,
+                  renderer = gifski_renderer(height = 1000))
+
+```
+
+Although the animation shows clear changes in amount of death across years, the  rank of causes did not demonstrated properly on y-axis even using `fct_reorder`. Therefore, here is another version:
+
+
+```{r plot1_v3}
+
+plot1_v3 <- tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>% 
+  # creat rank per year
+  group_by(year) %>% 
+  arrange(desc(deaths_by_year_cause)) %>% 
+  mutate(rank = row_number()) %>% 
+  arrange(year) %>% 
+  ungroup() %>% 
+  #plot
+  ggplot(aes(x = '{frame_time}', y = rank)) +
+  geom_text(aes(label = cause, 
+                color = cause,
+                group = cause),
+            size = 8) +
+  scale_x_discrete(labels = NULL) +
+  scale_y_reverse() +
+  scale_color_paletteer_d(rcartocolor, Vivid) +
+  transition_states(year, 
+                    transition_length = 1,
+                    state_length = 3) +
+  ease_aes('sine-in-out') +
+  theme_void(base_size = 28) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(title = "Rank of causes of death: {closest_state}") +
+  guides(color = "none")
+  
+  
+animate(plot1_v3, duration = 30, nframes = 300,
+        renderer = gifski_renderer(width = 1200))
 ```
 

@@ -49,7 +49,7 @@
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["cause-of-death-gganimate-with-a-bar-graph_files/bowser-1.9.3/bowser.min.js","cause-of-death-gganimate-with-a-bar-graph_files/distill-2.2.21/template.v2.js","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1_r1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/jquery-1.11.3/jquery.min.js","cause-of-death-gganimate-with-a-bar-graph_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["cause-of-death-gganimate-with-a-bar-graph_files/bowser-1.9.3/bowser.min.js","cause-of-death-gganimate-with-a-bar-graph_files/distill-2.2.21/template.v2.js","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1_r1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v2-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v3-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/jquery-1.11.3/jquery.min.js","cause-of-death-gganimate-with-a-bar-graph_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1029,15 +1029,12 @@ tidy_df &lt;- df %&gt;%
   dplyr::select(year, cause_name, state, deaths, age_adjusted_death_rate) %&gt;%   
   mutate(cause = as_factor(cause_name),
          state = as_factor(state),
-         
          #transform rate to decimal value not %
-         rate = age_adjusted_death_rate/100) %&gt;%   
-  dplyr::select(year, state, cause, deaths, rate) %&gt;% 
-  
+         rate = age_adjusted_death_rate/100) %&gt;% 
+  dplyr::select(year, state, cause, deaths, rate) %&gt;%
   # filter out &quot;all causes&quot;
   filter(cause != &quot;All causes&quot;,
-         state != &quot;United States&quot;) %&gt;% 
-  
+         state != &quot;United States&quot;) %&gt;%
   # replace &quot;CLRD&quot; with its whole name
   mutate(cause = replace(as.character(cause), cause == &quot;CLRD&quot;, 
                          &quot;Chronic lower respiratory diseases&quot;))
@@ -1048,17 +1045,17 @@ Skim summary statistics
  n obs: 9180 
  n variables: 5 
 
--- Variable type:character ---------------------------------------------------------------------
+-- Variable type:character --------------------------------------------------------
  variable missing complete    n min max empty n_unique
     cause       0     9180 9180   6  34     0       10
 
--- Variable type:factor ------------------------------------------------------------------------
+-- Variable type:factor -----------------------------------------------------------
  variable missing complete    n n_unique
     state       0     9180 9180       51
                              top_counts ordered
  Ala: 180, Ala: 180, Ari: 180, Ark: 180   FALSE
 
--- Variable type:integer -----------------------------------------------------------------------
+-- Variable type:integer ----------------------------------------------------------
  variable missing complete    n    mean      sd   p0  p25    p50
    deaths       0     9180 9180 3725.39 7161.71   21  526 1401.5
      year       0     9180 9180 2007.5     5.19 1999 2003 2007.5
@@ -1066,7 +1063,7 @@ Skim summary statistics
  3228.25 71930 &lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
  2012     2016 &lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2587&gt;
 
--- Variable type:numeric -----------------------------------------------------------------------
+-- Variable type:numeric ----------------------------------------------------------
  variable missing complete    n mean   sd    p0  p25  p50  p75 p100
      rate       0     9180 9180 0.61 0.68 0.026 0.18 0.31 0.55 3.47
      hist
@@ -1084,15 +1081,13 @@ Skim summary statistics
 <p>The first plot is intended to deliver a message to <strong>general population</strong> and to answer <em>how leading death causes change over years</em>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
-plot1_v1 &lt;- tidy_df %&gt;% 
-  
+plot1_v1 &lt;- tidy_df %&gt;%
   # calculate yearly total deaths from all states
-  group_by(year, cause) %&gt;% 
+  group_by(year, cause) %&gt;%
   summarise(deaths_by_year_cause = sum(deaths)) %&gt;%
-  
   # plot
   ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
-             y = deaths_by_year_cause/1000000)) +
+             y = deaths_by_year_cause/100000)) +
     geom_col(fill = &quot;steelblue&quot;,
              alpha = 0.7) +
     scale_y_continuous(expand = c(0, 0)) +
@@ -1101,7 +1096,7 @@ plot1_v1 &lt;- tidy_df %&gt;%
     theme_minimal(base_size = 20) +
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = &quot;bold&quot;)) +
-    labs(y = &quot;No. of deaths (in millions)&quot;,
+    labs(y = &quot;No. of deaths (in 100k)&quot;,
          x = &quot;Causes of deaths&quot;,
          title = &quot;Heart disease is a leading cause of death over years&quot;,
          caption = &quot;Source: Centers for Disease Control and Prevention&quot;)
@@ -1110,17 +1105,17 @@ plot1_v1 &lt;- tidy_df %&gt;%
 plot1_v1</code></pre>
 <p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png" width="1440" /></p>
 </div>
+<p>From the graph it is easy to tell heart disease is shown to be a leading cause of death over years while cancer is a close number 2.</p>
+<p>One feedback from a peer reviewer is the single color on the chart. One palette I originally plan to use is <code>colorblindr::scale_fill_OkabeIto</code>, but it has only 8 colors while there are 10 causes of death to be plot. I end up using one of the diverging palette from <a href="http://colorbrewer2.org/#type=diverging&amp;scheme=BrBG&amp;n=10">colorbrewer 2.0</a>.</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
-tidy_df %&gt;% 
-  
+tidy_df %&gt;%
   # calculate yearly total deaths from all states
-  group_by(year, cause) %&gt;% 
+  group_by(year, cause) %&gt;%
   summarise(deaths_by_year_cause = sum(deaths)) %&gt;%
-  
   # plot
   ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
-             y = deaths_by_year_cause/1000000,
+             y = deaths_by_year_cause/100000,
              fill = cause)) +
     geom_col(alpha = 0.7) +
     scale_y_continuous(expand = c(0, 0)) +
@@ -1131,11 +1126,78 @@ tidy_df %&gt;%
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = &quot;bold&quot;),
           legend.position = &quot;none&quot;) +
-    labs(y = &quot;No. of deaths (in millions)&quot;,
+    labs(y = &quot;No. of deaths (in 100k)&quot;,
          x = &quot;Causes of deaths&quot;,
          title = &quot;Heart disease is a leading cause of death over years&quot;,
          caption = &quot;Source: Centers for Disease Control and Prevention&quot;)</code></pre>
 <p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1_r1-1.png" width="1440" /></p>
+</div>
+<p>Although the top 2 causes have a clear trend and rank over years, a total of 18 facets make it hard to compare amounts of death and ranks of causes across years.</p>
+<div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+plot1_v2 &lt;- tidy_df %&gt;% 
+  group_by(year, cause) %&gt;%
+  summarise(deaths_by_year_cause = sum(deaths)) %&gt;%
+  # plot
+  ggplot(aes(x = fct_reorder(cause, deaths_by_year_cause), 
+             y = deaths_by_year_cause/100000,
+             fill = cause)) +
+    geom_col(alpha = 0.7) +
+    scale_y_continuous(expand = c(0, 0)) +
+    scale_fill_brewer(palette = &quot;BrBG&quot;) +
+    coord_flip() +
+    theme_minimal(base_size = 15) +
+    theme(panel.grid.minor = element_blank(),
+          plot.margin = margin(1, 0, 1, 0.3, &quot;cm&quot;),
+          legend.position = &quot;none&quot;) +
+    transition_time(year) +
+    labs(title = &quot;Top 10 Causes of Deaths&quot;,
+         subtitle = &quot;Year: {round(frame_time)}&quot;,
+         caption = &quot;Source: Centers for Disease Control and Prevention&quot;,
+         y = &quot;No. of deaths (in 100k)&quot;,
+         x = &quot;Causes of deaths&quot;)
+
+
+animate(plot1_v2, duration = 25,  
+                  nframes = 100, 
+                  end_pause = 10,
+                  renderer = gifski_renderer(height = 1000))</code></pre>
+<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v2-1.gif" /><!-- --></p>
+</div>
+<p>Although the animation shows clear changes in amount of death across years, the rank of causes did not demonstrated properly on y-axis even using <code>fct_reorder</code>. Therefore, here is another version:</p>
+<div class="layout-chunk" data-layout="l-body">
+<pre class="r"><code>
+plot1_v3 &lt;- tidy_df %&gt;% 
+  group_by(year, cause) %&gt;% 
+  summarise(deaths_by_year_cause = sum(deaths)) %&gt;% 
+  # creat rank per year
+  group_by(year) %&gt;% 
+  arrange(desc(deaths_by_year_cause)) %&gt;% 
+  mutate(rank = row_number()) %&gt;% 
+  arrange(year) %&gt;% 
+  ungroup() %&gt;% 
+  #plot
+  ggplot(aes(x = &#39;{frame_time}&#39;, y = rank)) +
+  geom_text(aes(label = cause, 
+                color = cause,
+                group = cause),
+            size = 8) +
+  scale_x_discrete(labels = NULL) +
+  scale_y_reverse() +
+  scale_color_paletteer_d(rcartocolor, Vivid) +
+  transition_states(year, 
+                    transition_length = 1,
+                    state_length = 3) +
+  ease_aes(&#39;sine-in-out&#39;) +
+  theme_void(base_size = 28) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  labs(title = &quot;Rank of causes of death: {closest_state}&quot;) +
+  guides(color = &quot;none&quot;)
+  
+  
+animate(plot1_v3, duration = 30, nframes = 300,
+        renderer = gifski_renderer(width = 1200))</code></pre>
+<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v3-1.gif" /><!-- --></p>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
