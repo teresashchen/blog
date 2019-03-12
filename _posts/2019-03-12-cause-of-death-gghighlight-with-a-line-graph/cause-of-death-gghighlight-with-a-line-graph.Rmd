@@ -1,7 +1,7 @@
 ---
 title: "Cause of Death- {gghighlight} with a Line Graph"
 description: |
-  A short description of the post.
+  This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). 
 author:
   - name: Teresa Chen
     url: https://teresashchen.netlify.com/
@@ -11,11 +11,68 @@ output:
     self_contained: false
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
+
+Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
+Q2. What are changing patterns of each leading cause of death over years?  
+Q3. What are distinct causes of death in each state of the United States?  
+
+This post presents the second part of the project, in which data visualization for Q2 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the post.  
+
+Here are required packages:
+
+```{r required-package, echo=TRUE, eval=FALSE}
+
+install.packages("rio")
+install.packages("here")
+install.packages("tidyverse")
+install.packages("paletteer")
+install.packages("janitor")
+install.packages("gghighlight")
+
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+Here is a global settings:
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+```{r setup, echo=TRUE}
 
+library(tidyverse)
+library(rio)
+library(here)
+library(paletteer)
+library(janitor)
+library(gghighlight)
+
+knitr::opts_chunk$set(echo = TRUE,
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+
+```{r import_tidy_data, include=FALSE}
+
+df <- import(here::here("data", "Leading_Causes_of_Death__United_States.csv"),
+              setclass = "tbl_df") %>% 
+  janitor::clean_names()
+
+tidy_df <- df %>% 
+  dplyr::select(year, cause_name, state, deaths, age_adjusted_death_rate) %>%   
+  mutate(cause = as_factor(cause_name),
+         state = as_factor(state),
+         #transform rate to decimal value not %
+         rate = age_adjusted_death_rate/100) %>% 
+  dplyr::select(year, state, cause, deaths, rate) %>%
+  # filter out "all causes"
+  filter(cause != "All causes",
+         state != "United States") %>%
+  # replace "CLRD" with its whole name
+  mutate(cause = replace(as.character(cause), cause == "CLRD", 
+                         "Chronic lower respiratory diseases"))
+```
+
+
+## Data visualization 
+
+### First plot
+
+### Second plot
