@@ -249,7 +249,8 @@ plot1_v3 <- tidy_df %>%
   ease_aes('sine-in-out') +
   theme_void(base_size = 28) +
   theme(plot.title = element_text(hjust = 0.5)) +
-  labs(title = "Rank of causes of death: {closest_state}") +
+  labs(title = "Top 10 Causes of Death in {closest_state}",
+       caption = "Source: Centers for Disease Control and Prevention") +
   guides(color = "none")
   
   
@@ -282,7 +283,7 @@ plot1_ani <- tidy_df %>%
     geom_tile(aes(y = deaths_by_year_cause/2,
                   height = deaths_by_year_cause,
                   width = 0.9),
-              alpha = 1) +
+              alpha = 0.8) +
     coord_flip(clip = "off", expand = FALSE) +
     scale_x_reverse() +
     scale_fill_brewer(palette = "BrBG") +
@@ -294,6 +295,7 @@ plot1_ani <- tidy_df %>%
     guides(color = FALSE, fill = FALSE) +
     theme_classic() +
     theme(plot.title = element_text(hjust = 0, vjust = 0.5, size = 22),
+          plot.caption = element_text(size = 13), 
           axis.ticks.y = element_blank(),
           axis.text.y = element_blank(),
           axis.text.x = element_text(size = 15),
