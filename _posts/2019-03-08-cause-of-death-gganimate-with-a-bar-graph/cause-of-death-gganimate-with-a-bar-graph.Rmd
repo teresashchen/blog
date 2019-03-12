@@ -111,9 +111,13 @@ skim(tidy_df)
 3. There are `r length(unique(tidy_df$state))` states. 
 4. Dataframe has data from 1999 to 2016 (`r 2016-1999+1` years).
 
-## First plot
 
-The first plot is intended to deliver a message to **general population** and to answer *how leading death causes change over years*.  
+## Data visulization  
+
+The first #dataviz of this R project is intended to deliver a message to **general population** and to answer *how leading death causes change over years*. In addition to showing the final plot, I include all iterations of plots and broke down the problem into sub-problems/versions leading up to my final plot.  
+
+
+### First plot- bar chart 
 
 ```{r plot1_v1, fig.width=15, fig.height=20, layout = "l-body-outset"}
 
@@ -141,9 +145,12 @@ plot1_v1 <- tidy_df %>%
 plot1_v1
 ```
 
+### Second plot- bar chart with colors  
+
 From the graph it is easy to tell heart disease is shown to be a leading cause of death over years while cancer is a close number 2.
 
 One feedback from a peer reviewer is the single color on the chart. One palette I originally plan to use is `colorblindr::scale_fill_OkabeIto`, but it has only 8 colors while there are 10 causes of death to be plot. I end up using one of the diverging palette from [colorbrewer 2.0](http://colorbrewer2.org/#type=diverging&scheme=BrBG&n=10).
+
 
 
 ```{r plot1_v1_r1, fig.width=15, fig.height=20, layout = "l-body-outset"}
@@ -167,14 +174,17 @@ tidy_df %>%
           plot.title = element_text(face = "bold"),
           legend.position = "none") +
     labs(y = "No. of deaths (in 100k)",
-         x = "Causes of deaths",
+         x = " ",
          title = "Heart disease is a leading cause of death over years",
          caption = "Source: Centers for Disease Control and Prevention")
          
 
 ```
 
-Although the top 2 causes have a clear trend and rank over years, a total of 18 facets make it hard to compare amounts of death and ranks of causes across years. 
+
+### Third plot- **animated** bar chart
+
+Although the top 2 causes have a clear trend and rank over years, a total of 18 facets make it hard to compare amounts of death and ranks of causes across years. Therefore I used `{gganimate}` package to condense information to a single year and animate changes over years. 
 
 
 ```{r plot1_v2, layout = "l-body-outset"}
@@ -190,7 +200,7 @@ plot1_v2 <- tidy_df %>%
     scale_y_continuous(expand = c(0, 0)) +
     scale_fill_brewer(palette = "BrBG") +
     coord_flip() +
-    theme_minimal(base_size = 15) +
+    theme_minimal(base_size = 20) +
     theme(panel.grid.minor = element_blank(),
           plot.margin = margin(1, 0, 1, 0.3, "cm"),
           legend.position = "none") +
@@ -199,20 +209,21 @@ plot1_v2 <- tidy_df %>%
          subtitle = "Year: {round(frame_time)}",
          caption = "Source: Centers for Disease Control and Prevention",
          y = "No. of deaths (in 100k)",
-         x = "Causes of deaths")
+         x = "")
 
 
-animate(plot1_v2, duration = 25,  
-                  nframes = 100, 
-                  end_pause = 10,
-                  renderer = gifski_renderer(height = 1000))
+animate(plot1_v2, duration = 25, nframes = 100, end_pause = 10,
+        width = 800, height = 600, renderer = gifski_renderer("ani_bar.gif"))
 
 ```
+
+
+### Forth plot- **rank** chart
 
 Although the animation shows clear changes in amount of death across years, the  rank of causes did not demonstrated properly on y-axis even using `fct_reorder`. Therefore, here is another version:
 
 
-```{r plot1_v3}
+```{r plot1_v3, layout = "l-body-outset"}
 
 plot1_v3 <- tidy_df %>% 
   group_by(year, cause) %>% 
@@ -243,6 +254,68 @@ plot1_v3 <- tidy_df %>%
   
   
 animate(plot1_v3, duration = 30, nframes = 300,
-        renderer = gifski_renderer(width = 1200))
+        width = 800, height = 600, end_pause = 10, 
+        renderer = gifski_renderer("ani_rank.gif"))
 ```
 
+
+### Fifth chart- animated **sorted** bar chart  
+
+This version of data visualization allows us to see changes in rank of causes over years, for example, the rank of Alzheimer's disease increased from 2003-2004 and 2006-2007. Nevertheless, My peer reviewr and I both prefer the previous version because it provides more info in terms of how far ahead one cause is from another cause. 
+
+I spent a good amount of time to figure out how I could change the ranks of cause over y-axis. This [stackoverflow thread](https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other) exactly teaches me how to do it. 
+
+And here is my version of replication: 
+
+
+```{r plot1_v4, layout = "l-body-outset"}
+
+plot1_ani <- tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>%
+  group_by(year) %>% 
+  # create rank variable and variable label
+  mutate(rank = row_number(-deaths_by_year_cause),
+         val_lbl = paste0(" ", deaths_by_year_cause)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = rank, group = cause, fill = cause, color = cause)) +
+    geom_tile(aes(y = deaths_by_year_cause/2,
+                  height = deaths_by_year_cause,
+                  width = 0.9),
+              alpha = 1) +
+    coord_flip(clip = "off", expand = FALSE) +
+    scale_x_reverse() +
+    scale_fill_brewer(palette = "BrBG") +
+    scale_color_brewer(palette = "BrBG") +
+    geom_text(aes(y = 0, label = paste(cause, " "), vjust = 0.2, hjust = 1), 
+              color = "black", size = 5) +
+    geom_text(aes(y = deaths_by_year_cause, label = val_lbl), hjust = 0,
+              color = "black") +
+    guides(color = FALSE, fill = FALSE) +
+    theme_classic() +
+    theme(plot.title = element_text(hjust = 0, vjust = 0.5, size = 22),
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.text.x = element_text(size = 15),
+          plot.margin = margin(1, 2, 1, 5.5, "cm")) +
+    labs(title='Top 10 Causes of Death in {closest_state}', 
+         x = "", 
+         y = "",
+         caption = "Source: Centers for Disease Control and Prevention") +
+    transition_states(year, transition_length = 4, state_length = 1) +
+    ease_aes("cubic-in-out")
+
+
+
+animate(plot1_ani, 200, fps = 10, duration = 30, end_pause = 10,
+        width = 800, height = 600, 
+        renderer = gifski_renderer("plot1_ani.gif"))
+  
+
+```
+
+The key feature here is to use `geom_tile` to allow the bars slide positions. Other things I've learned through this plot are the use of `clip = "off"` in `coord_flip`, which allows drawing of data points anywhere on the plot and the use of `expand = FALSE` to add a small expansion factor to the limits to ensure that data and axes don't overlap.
+
+## Conclusion  
+
+Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three tims more of deaths compare to all the other causes every year. It seems Alzheimer's disease increases its rank on the top 10 causes of death over years. 
