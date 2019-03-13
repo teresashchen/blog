@@ -133,7 +133,9 @@ tidy_df %>%
   summarise(deaths_by_year_cause = sum(deaths)) %>% 
   mutate(cause = factor(cause, 
                         levels = c("Heart disease", "Cancer", "Unintentional injuries",
-                                   "Chronic lower respiratory diseases", "Stroke", "Alzheimer's disease", "Diabetes", "Influenza and pneumonia", "Kidney disease" , "Suicide"  
+                                   "Chronic lower respiratory diseases", "Stroke", 
+                                   "Alzheimer's disease", "Diabetes", 
+                                   "Influenza and pneumonia", "Kidney disease" , "Suicide"  
                                    ))) %>% 
   ggplot(aes(x = year, y = deaths_by_year_cause/10000, color = cause)) +
     geom_line(size = 2) +
@@ -165,7 +167,9 @@ tidy_df %>%
   summarise(deaths_by_year_cause = sum(deaths)) %>% 
   mutate(cause = factor(cause, 
                         levels = c("Heart disease", "Cancer", "Unintentional injuries",
-                                   "Chronic lower respiratory diseases", "Stroke", "Alzheimer's disease", "Diabetes", "Influenza and pneumonia", "Kidney disease" , "Suicide"  
+                                   "Chronic lower respiratory diseases", "Stroke", 
+                                   "Alzheimer's disease", "Diabetes", 
+                                   "Influenza and pneumonia", "Kidney disease" , "Suicide"  
                                    ))) %>%  
   ggplot(aes(x = year, y = deaths_by_year_cause/10000, color = cause)) +
     geom_line(size = 2) +
