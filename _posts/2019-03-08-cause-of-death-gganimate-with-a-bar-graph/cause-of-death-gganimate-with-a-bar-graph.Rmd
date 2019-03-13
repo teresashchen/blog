@@ -273,7 +273,7 @@ I spent a good amount of time to figure out how I could change the ranks of caus
 And here is my version of replication: 
 
 
-```{r plot1_v4, layout = "l-body-outset"}
+```{r plot1_v4, layout = "l-body-outset", preview=TRUE}
 
 plot1_ani <- tidy_df %>% 
   group_by(year, cause) %>% 
