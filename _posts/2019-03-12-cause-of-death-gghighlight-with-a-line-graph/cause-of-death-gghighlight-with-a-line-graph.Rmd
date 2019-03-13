@@ -9,6 +9,10 @@ date: 03-12-2019
 output:
   distill::distill_article:
     self_contained: false
+    
+categories:
+  - dataviz
+  - rstats
 ---
 
 The R project aims to answer the following three questions by demonstrating three main data vidualizations:  

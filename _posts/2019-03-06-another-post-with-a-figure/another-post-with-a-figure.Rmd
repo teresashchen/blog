@@ -12,7 +12,7 @@ output:
 
 categories:
   - dataviz
-  - class
+  - rstats
 ---
 
 ```{r setup, include=FALSE}
