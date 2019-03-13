@@ -45,7 +45,7 @@
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Cause of Death- {gganimate} with a Bar Graph"]},{"type":"character","attributes":{},"value":["This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/)."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Teresa Chen"]},{"type":"character","attributes":{},"value":["https://teresashchen.netlify.com/"]}]}]},{"type":"character","attributes":{},"value":["03-08-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories"]}},"value":[{"type":"character","attributes":{},"value":["Cause of Death- {gganimate} with a Bar Graph"]},{"type":"character","attributes":{},"value":["This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/)."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Teresa Chen"]},{"type":"character","attributes":{},"value":["https://teresashchen.netlify.com/"]}]}]},{"type":"character","attributes":{},"value":["03-08-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]},{"type":"character","attributes":{},"value":["dataviz","rstats"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1399,17 +1399,17 @@ Skim summary statistics
  n obs: 9180 
  n variables: 5 
 
--- Variable type:character --------------------------------------------------------------------------------
+-- Variable type:character -----------------------------------------------------------------------------------------------
  variable missing complete    n min max empty n_unique
     cause       0     9180 9180   6  34     0       10
 
--- Variable type:factor -----------------------------------------------------------------------------------
+-- Variable type:factor --------------------------------------------------------------------------------------------------
  variable missing complete    n n_unique
     state       0     9180 9180       51
                              top_counts ordered
  Ala: 180, Ala: 180, Ari: 180, Ark: 180   FALSE
 
--- Variable type:integer ----------------------------------------------------------------------------------
+-- Variable type:integer -------------------------------------------------------------------------------------------------
  variable missing complete    n    mean      sd   p0  p25    p50
    deaths       0     9180 9180 3725.39 7161.71   21  526 1401.5
      year       0     9180 9180 2007.5     5.19 1999 2003 2007.5
@@ -1417,7 +1417,7 @@ Skim summary statistics
  3228.25 71930 &lt;U+2587&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;&lt;U+2581&gt;
  2012     2016 &lt;U+2587&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2585&gt;&lt;U+2587&gt;
 
--- Variable type:numeric ----------------------------------------------------------------------------------
+-- Variable type:numeric -------------------------------------------------------------------------------------------------
  variable missing complete    n mean   sd    p0  p25  p50  p75 p100
      rate       0     9180 9180 0.61 0.68 0.026 0.18 0.31 0.55 3.47
      hist
@@ -1547,7 +1547,8 @@ plot1_v3 &lt;- tidy_df %&gt;%
   ease_aes(&#39;sine-in-out&#39;) +
   theme_void(base_size = 28) +
   theme(plot.title = element_text(hjust = 0.5)) +
-  labs(title = &quot;Rank of causes of death: {closest_state}&quot;) +
+  labs(title = &quot;Top 10 Causes of Death in {closest_state}&quot;,
+       caption = &quot;Source: Centers for Disease Control and Prevention&quot;) +
   guides(color = &quot;none&quot;)
   
   
@@ -1574,7 +1575,7 @@ plot1_ani &lt;- tidy_df %&gt;%
     geom_tile(aes(y = deaths_by_year_cause/2,
                   height = deaths_by_year_cause,
                   width = 0.9),
-              alpha = 1) +
+              alpha = 0.8) +
     coord_flip(clip = &quot;off&quot;, expand = FALSE) +
     scale_x_reverse() +
     scale_fill_brewer(palette = &quot;BrBG&quot;) +
@@ -1586,6 +1587,7 @@ plot1_ani &lt;- tidy_df %&gt;%
     guides(color = FALSE, fill = FALSE) +
     theme_classic() +
     theme(plot.title = element_text(hjust = 0, vjust = 0.5, size = 22),
+          plot.caption = element_text(size = 13), 
           axis.ticks.y = element_blank(),
           axis.text.y = element_blank(),
           axis.text.x = element_text(size = 15),
@@ -1602,7 +1604,7 @@ plot1_ani &lt;- tidy_df %&gt;%
 animate(plot1_ani, 200, fps = 10, duration = 30, end_pause = 10,
         width = 800, height = 600, 
         renderer = gifski_renderer(&quot;plot1_ani.gif&quot;))</code></pre>
-<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif" /><!-- --></p>
+<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif" data-distill-preview=1 /></p>
 </div>
 <p>The key feature here is to use <code>geom_tile</code> to allow the bars slide positions. Other things I’ve learned through this plot are the use of <code>clip = "off"</code> in <code>coord_flip</code>, which allows drawing of data points anywhere on the plot and the use of <code>expand = FALSE</code> to add a small expansion factor to the limits to ensure that data and axes don’t overlap.</p>
 <h2 id="conclusion">Conclusion</h2>

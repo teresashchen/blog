@@ -10,9 +10,12 @@
       }
     ],
     "date": "2019-03-12",
-    "categories": [],
+    "categories": [
+      "dataviz",
+      "rstats"
+    ],
     "preview": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/cause-of-death-gghighlight-with-a-line-graph_files/figure-html5/plot2_v3-1.png",
-    "last_modified": "2019-03-13T14:30:34-07:00"
+    "last_modified": "2019-03-13T16:14:37-07:00"
   },
   {
     "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",
@@ -25,9 +28,12 @@
       }
     ],
     "date": "2019-03-08",
-    "categories": [],
+    "categories": [
+      "dataviz",
+      "rstats"
+    ],
     "preview": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png",
-    "last_modified": "2019-03-12T10:57:47-07:00"
+    "last_modified": "2019-03-13T16:18:38-07:00"
   },
   {
     "path": "posts/2019-03-06-another-in-class-test/",
