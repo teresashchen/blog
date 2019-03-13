@@ -1,5 +1,20 @@
 [
   {
+    "path": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/",
+    "title": "Cause of Death- {gghighlight} with a Line Graph",
+    "description": "This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-12",
+    "categories": [],
+    "preview": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/cause-of-death-gghighlight-with-a-line-graph_files/figure-html5/plot2_v3-1.png",
+    "last_modified": "2019-03-13T14:30:34-07:00"
+  },
+  {
     "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",
     "title": "Cause of Death- {gganimate} with a Bar Graph",
     "description": "This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",

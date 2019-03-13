@@ -29,6 +29,7 @@ install.packages("tidyverse")
 install.packages("paletteer")
 install.packages("janitor")
 install.packages("gghighlight")
+install.packages("colorblinr")
 
 ```
 
@@ -42,6 +43,7 @@ library(here)
 library(paletteer)
 library(janitor)
 library(gghighlight)
+library(colorblindr)
 
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -70,9 +72,125 @@ tidy_df <- df %>%
                          "Chronic lower respiratory diseases"))
 ```
 
-
 ## Data visualization 
 
-### First plot
+The second plot is for **policy-maker or health-related research** and is a quick summary plot regarding changes in causes of death over years. 
 
-### Second plot
+### First plot- line graph with annotation
+
+```{r plot2,fig.height=10, fig.width=12, layout = "l-body-outset"}
+
+# create data for labeling
+df_plot2 <-tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths))
+
+  
+tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>%   
+  #plot
+  ggplot(aes(x = year, y = deaths_by_year_cause/10000, color = cause)) +
+    geom_line(size = 1) +
+    scale_x_continuous(breaks = seq(2000, 2016, by = 2),
+                       expand = c(0, 0)) +
+    scale_y_log10(expand = c(0, 0), breaks = c(3, 5, 10, 20, 30, 60, 100),
+                  limits = c(2, 100)) + 
+    scale_color_paletteer_d(rcartocolor, Vivid) +
+    theme_classic(base_size = 15) +
+    geom_text(data = filter(df_plot2, year == 2016),aes(label = cause),
+              nudge_x = 5.5, hjust = 1, size = 4) +
+    guides(color = "none") +
+    theme(panel.grid.minor = element_blank(),
+          legend.key.size = unit(3, 'lines'),
+          plot.title = element_text(face = "bold"),
+          plot.subtitle = element_text(face = "italic")) +
+    labs(title = "Causes of Death Across Years",
+         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+         x = "Year",
+         y = "No. of deaths (in 10k)",
+         caption = "Source: Centers for Disease Control and Prevention ")
+
+              
+  
+  
+```
+
+From the plot it is easy to tell the changes in number of death across years. Some dieases show an increased number (suicide, kidney disease, diabetes, Alzheimer's disease, chronic lower respiratory disease, unintentional injuries), some disease show a decreased number (influenza and pneumonia, stroke, heart disease) while some does not change to much (cancer).
+
+The cons of this plot is the texts annotating causes are overlapped. I have tried to maximize the figure height and space out each line to avoid the issue without distorting a figure ratio to musch, but the problem remains the same to some texts. For example, "Influenza and pneumonia" is on top of "Kidney disease". So how about getting rid of the text then? 
+
+
+### Second plot- line plot with a color legend
+
+```{r plot2_v2, fig.width=18, fig.height=13, layout = "l-body-outset"}
+tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>% 
+  mutate(cause = factor(cause, 
+                        levels = c("Heart disease", "Cancer", "Unintentional injuries",
+                                   "Chronic lower respiratory diseases", "Stroke", "Alzheimer's disease", "Diabetes", "Influenza and pneumonia", "Kidney disease" , "Suicide"  
+                                   ))) %>% 
+  ggplot(aes(x = year, y = deaths_by_year_cause/10000, color = cause)) +
+    geom_line(size = 2) +
+    scale_x_continuous(breaks = seq(2000, 2016, by = 2), expand = c(0, 0)) +
+    scale_y_log10(expand = c(0, 0), breaks = c(3, 5, 10, 20, 30, 60, 100),
+                  limits = c(2, 100)) + 
+    scale_color_paletteer_d(rcartocolor, Vivid) +
+    theme_classic(base_size = 26) +
+    theme(panel.grid.minor = element_blank(),
+          legend.key.size = unit(3, 'lines'),
+          plot.title = element_text(face = "bold"),
+          plot.subtitle = element_text(face = "italic")) +
+    labs(title = "Causes of Death Across Years",
+         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+         x = "Year",
+         y = "No. of deaths (in 10k)",
+         caption = "Source: Centers for Disease Control and Prevention ",
+         color = "")
+```
+
+
+Although the texts of each cause are legible in the color legend now, a total of 10 colors definitly increases audiences' cognitive loads. The other concern is that there is no color-blind-friendly qualitative palette out there that has more than 10 colors. Therefore, inspired by peer reviewrs' suggestion, I decide to use `{gghighlight}` to select three causes of interest and plot these three causes with color-blind-friendly palette `colorblindr::scale_color_OkabeIto()`in the final version of plot below. Note that `scale_color_OkabeIto` needs additional two packages `{cowplot}` and `{colorspace}` to make the palette work. Here is the [detail](https://www.rdocumentation.org/packages/colorblindr/versions/0.1.0). 
+
+
+```{r plot2_v3, fig.width=10, fig.height=8, layout = "l-body-outset", preview=TRUE}
+
+tidy_df %>% 
+  group_by(year, cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>% 
+  mutate(cause = factor(cause, 
+                        levels = c("Heart disease", "Cancer", "Unintentional injuries",
+                                   "Chronic lower respiratory diseases", "Stroke", "Alzheimer's disease", "Diabetes", "Influenza and pneumonia", "Kidney disease" , "Suicide"  
+                                   ))) %>%  
+  ggplot(aes(x = year, y = deaths_by_year_cause/10000, color = cause)) +
+    geom_line(size = 2) +
+    gghighlight(cause == "Heart disease" |
+                cause == "Cancer" |
+                cause == "Alzheimer's disease") +
+    scale_x_continuous(breaks = seq(2000, 2016, by = 2), expand = c(0, 0), limits = c(1999, 2017)) +
+    scale_y_log10(expand = c(0, 0), breaks = c(3, 5, 10, 20, 30, 60, 100),
+                  limits = c(2, 100)) + 
+    # color-blind-friendly
+    scale_color_OkabeIto() + 
+    theme_classic(base_size = 15) +
+    guides(color = "none") +
+    theme(panel.grid.minor = element_blank(),
+          plot.title = element_text(face = "bold"),
+          plot.subtitle = element_text(face = "italic")) +
+    labs(title = "Causes of Death Across Years",
+         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+         x = "Year",
+         y = "No. of deaths (in 10k)",
+         caption = "Source: Centers for Disease Control and Prevention ",
+         color = "")
+
+```
+
+## Conclusion
+
+This plot is intended to policty-makers and/or researchers to see the overall changes of causes of death across years. It seems heart disease, cancer and Alzheimer's disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer's disease increases its amount rapidly. 
+
+
+
+
