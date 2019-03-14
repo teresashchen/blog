@@ -50,7 +50,7 @@
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["ani_bar.gif","ani_rank.gif","cause-of-death-gganimate-with-a-bar-graph_files/bowser-1.9.3/bowser.min.js","cause-of-death-gganimate-with-a-bar-graph_files/distill-2.2.21/template.v2.js","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1_r1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v2-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v3-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/jquery-1.11.3/jquery.min.js","cause-of-death-gganimate-with-a-bar-graph_files/webcomponents-2.0.0/webcomponents.js","plot1_ani.gif"]}
+  {"type":"character","attributes":{},"value":["ani_bar.gif","ani_rank.gif","cause-of-death-gganimate-with-a-bar-graph_files/bowser-1.9.3/bowser.min.js","cause-of-death-gganimate-with-a-bar-graph_files/distill-2.2.21/template.v2.js","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v1_r1-1.png","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v2-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v3-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif","cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4_preview-1.png","cause-of-death-gganimate-with-a-bar-graph_files/jquery-1.11.3/jquery.min.js","cause-of-death-gganimate-with-a-bar-graph_files/webcomponents-2.0.0/webcomponents.js","plot1_ani.gif"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 
@@ -1604,7 +1604,7 @@ plot1_ani &lt;- tidy_df %&gt;%
 animate(plot1_ani, 200, fps = 10, duration = 30, end_pause = 10,
         width = 800, height = 600, 
         renderer = gifski_renderer(&quot;plot1_ani.gif&quot;))</code></pre>
-<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif" data-distill-preview=1 /></p>
+<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4-1.gif" /><!-- --></p>
 </div>
 <p>The key feature here is to use <code>geom_tile</code> to allow the bars slide positions. Other things I’ve learned through this plot are the use of <code>clip = "off"</code> in <code>coord_flip</code>, which allows drawing of data points anywhere on the plot and the use of <code>expand = FALSE</code> to add a small expansion factor to the limits to ensure that data and axes don’t overlap.</p>
 <h2 id="conclusion">Conclusion</h2>
