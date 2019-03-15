@@ -1,7 +1,7 @@
 ---
-title: "About this blog"
+title: "Welcome!"
 description: |
-  Me and the milestone of this blog 
+  You would know a little bit about me and this blog here. 
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 I am a PhD candidate in Human Physiology at the University of Oregon. I joined the Motion Analysis Lab in 2015. As a physical therapist, I aim to develop a career in the direction of mobility impairment research with translational applications to patient care or exercise performance. My research interest, specifically, focuses on age-related declines in cognitive and physical functions and their contributions to gait imbalance and falls and, ultimately, leads to new rehabilitation interventions.
 
-## Milestone
+## Milestone of the blog
 
 ### Febrary, 2019
 

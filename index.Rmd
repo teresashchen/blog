@@ -1,5 +1,5 @@
 ---
-title: "Teresa's Blog"
+title: "Teresa Chen"
 site: distill::distill_website
 listing: posts
 ---
