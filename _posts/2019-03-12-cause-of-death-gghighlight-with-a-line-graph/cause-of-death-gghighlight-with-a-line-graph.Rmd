@@ -78,7 +78,7 @@ tidy_df <- df %>%
 
 ## Data visualization 
 
-The second plot is for **policy-maker or health-related research** and is a quick summary plot regarding changes in causes of death over years. 
+The second plot of this R project series is for **policy-maker or health-related researcher** and is a quick summary plot regarding changes in causes of death over years. 
 
 ### First plot- line graph with annotation
 
@@ -197,7 +197,7 @@ tidy_df %>%
 
 ## Conclusion
 
-This plot is intended to policty-makers and/or researchers to see the overall changes of causes of death across years. It seems heart disease, cancer and Alzheimer's disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer's disease increases its amount rapidly. 
+The second #dataviz of this R project is intended to policty-makers and/or researchers to see the overall changes of causes of death across years. It seems heart disease, cancer and Alzheimer's disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer's disease increases its amount rapidly. 
 
 
 

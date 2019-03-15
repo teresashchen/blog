@@ -35,12 +35,10 @@ First, required packages are as follows:
 install.packages("rio")
 install.packages("here")
 install.packages("tidyverse")
-install.packages("gganimate")
-install.packages("paletteer")
-install.packages("maps")
-install.packages("transformr")
-install.packages("skimr")
+install.packages("skimr") 
 install.packages("janitor")
+install.packages("gganimate")
+install.packages("paletteer") # for colors
 
 ```
 
@@ -51,11 +49,10 @@ Second, load packages and set up the global settings:
 library(tidyverse)
 library(rio)
 library(here)
-library(gganimate)
-library(paletteer)
-library(maps)
 library(skimr)
 library(janitor)
+library(gganimate)
+library(paletteer)
 
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -268,10 +265,48 @@ animate(plot1_v3, duration = 30, nframes = 300,
 
 This version of data visualization allows us to see changes in rank of causes over years, for example, the rank of Alzheimer's disease increased from 2003-2004 and 2006-2007. Nevertheless, My peer reviewr and I both prefer the previous version because it provides more info in terms of how far ahead one cause is from another cause. 
 
-I spent a good amount of time to figure out how I could change the ranks of cause over y-axis. This [stackoverflow thread](https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other) exactly teaches me how to do it. 
+I spent a good amount of time to figure out how I could change the ranks of cause over y-axis. This [stackoverflow thread](https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other) exactly teaches me how to do it.  
 
-And here is my version of replication: 
+Here is the static version with only year 2016 shown in the figure:
 
+```{r plot1_v4_preview, fig.height=8, fig.width= 12, echo=FALSE, layout = "l-body-outset", preview=TRUE}
+
+tidy_df %>% 
+  filter(year == 2016) %>% 
+  group_by(cause) %>% 
+  summarise(deaths_by_year_cause = sum(deaths)) %>%
+  # create rank variable and variable label
+  mutate(rank = row_number(-deaths_by_year_cause),
+         val_lbl = paste0(" ", deaths_by_year_cause)) %>% 
+  ggplot(aes(x = rank, group = cause, fill = cause, color = cause)) +
+    geom_tile(aes(y = deaths_by_year_cause/2,
+                  height = deaths_by_year_cause,
+                  width = 0.9),
+              alpha = 0.8) +
+    coord_flip(clip = "off", expand = FALSE) +
+    scale_x_reverse() +
+    scale_fill_brewer(palette = "BrBG") +
+    scale_color_brewer(palette = "BrBG") +
+    geom_text(aes(y = 0, label = paste(cause, " "), vjust = 0.2, hjust = 1), 
+              color = "black", size = 5) +
+    geom_text(aes(y = deaths_by_year_cause, label = val_lbl), hjust = 0,
+              color = "black") +
+    guides(color = FALSE, fill = FALSE) +
+    theme_classic() +
+    theme(plot.title = element_text(hjust = 0, vjust = 5, size = 22),
+          plot.caption = element_text(size = 13), 
+          axis.ticks.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.text.x = element_text(size = 15),
+          plot.margin = margin(1, 2, 1, 8, "cm")) +
+    labs(title='Top 10 Causes of Death in 2016', 
+         x = "", 
+         y = "",
+         caption = "Source: Centers for Disease Control and Prevention")
+
+```
+
+Let's see how I make it alive with `{gganimate}`! 
 
 ```{r plot1_v4, layout = "l-body-outset"}
 
@@ -324,42 +359,6 @@ The key feature here is to use `geom_tile` to allow the bars slide positions. Ot
 
 ## Conclusion  
 
-Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three tims more of deaths compare to all the other causes every year. It seems Alzheimer's disease increases its rank on the top 10 causes of death over years. 
+The first #dataviz of this R project is intended to deliver a message to general audience. Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three times more of deaths compare to all the other causes every year. It seems Alzheimer's disease increases its rank on the top 10 causes of death over years. 
 
-```{r plot1_v4_preview, fig.height=8, fig.width= 12, include=FALSE, preview=TRUE}
-
-tidy_df %>% 
-  filter(year == 2016) %>% 
-  group_by(cause) %>% 
-  summarise(deaths_by_year_cause = sum(deaths)) %>%
-  # create rank variable and variable label
-  mutate(rank = row_number(-deaths_by_year_cause),
-         val_lbl = paste0(" ", deaths_by_year_cause)) %>% 
-  ggplot(aes(x = rank, group = cause, fill = cause, color = cause)) +
-    geom_tile(aes(y = deaths_by_year_cause/2,
-                  height = deaths_by_year_cause,
-                  width = 0.9),
-              alpha = 0.8) +
-    coord_flip(clip = "off", expand = FALSE) +
-    scale_x_reverse() +
-    scale_fill_brewer(palette = "BrBG") +
-    scale_color_brewer(palette = "BrBG") +
-    geom_text(aes(y = 0, label = paste(cause, " "), vjust = 0.2, hjust = 1), 
-              color = "black", size = 5) +
-    geom_text(aes(y = deaths_by_year_cause, label = val_lbl), hjust = 0,
-              color = "black") +
-    guides(color = FALSE, fill = FALSE) +
-    theme_classic() +
-    theme(plot.title = element_text(hjust = 0, vjust = 5, size = 22),
-          plot.caption = element_text(size = 13), 
-          axis.ticks.y = element_blank(),
-          axis.text.y = element_blank(),
-          axis.text.x = element_text(size = 15),
-          plot.margin = margin(1, 2, 1, 8, "cm")) +
-    labs(title='Top 10 Causes of Death in 2016', 
-         x = "", 
-         y = "",
-         caption = "Source: Centers for Disease Control and Prevention")
-
-```
 

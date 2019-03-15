@@ -1329,12 +1329,10 @@ Q3. What are distinct causes of death in each state of the United States?</p>
 install.packages(&quot;rio&quot;)
 install.packages(&quot;here&quot;)
 install.packages(&quot;tidyverse&quot;)
+install.packages(&quot;skimr&quot;) 
+install.packages(&quot;janitor&quot;)
 install.packages(&quot;gganimate&quot;)
-install.packages(&quot;paletteer&quot;)
-install.packages(&quot;maps&quot;)
-install.packages(&quot;transformr&quot;)
-install.packages(&quot;skimr&quot;)
-install.packages(&quot;janitor&quot;)</code></pre>
+install.packages(&quot;paletteer&quot;) # for colors</code></pre>
 </div>
 <p>Second, load packages and set up the global settings:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1342,11 +1340,10 @@ install.packages(&quot;janitor&quot;)</code></pre>
 library(tidyverse)
 library(rio)
 library(here)
-library(gganimate)
-library(paletteer)
-library(maps)
 library(skimr)
 library(janitor)
+library(gganimate)
+library(paletteer)
 
 knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
@@ -1560,7 +1557,11 @@ animate(plot1_v3, duration = 30, nframes = 300,
 <h3 id="fifth-chart--animated-sorted-bar-chart">Fifth chart- animated <strong>sorted</strong> bar chart</h3>
 <p>This version of data visualization allows us to see changes in rank of causes over years, for example, the rank of Alzheimer’s disease increased from 2003-2004 and 2006-2007. Nevertheless, My peer reviewr and I both prefer the previous version because it provides more info in terms of how far ahead one cause is from another cause.</p>
 <p>I spent a good amount of time to figure out how I could change the ranks of cause over y-axis. This <a href="https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other">stackoverflow thread</a> exactly teaches me how to do it.</p>
-<p>And here is my version of replication:</p>
+<p>Here is the static version with only year 2016 shown in the figure:</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4_preview-1.png" width="1152" data-distill-preview=1 /></p>
+</div>
+<p>Let’s see how I make it alive with <code>{gganimate}</code>!</p>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
 plot1_ani &lt;- tidy_df %&gt;% 

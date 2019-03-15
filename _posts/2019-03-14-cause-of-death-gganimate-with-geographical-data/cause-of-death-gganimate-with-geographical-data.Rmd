@@ -1,0 +1,193 @@
+---
+title: "Cause of Death- {gganimate} with Geographical Data"
+description: |
+  This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).
+author:
+  - name: Teresa Chen
+    url: https://teresashchen.netlify.com/
+date: 03-14-2019
+output:
+  distill::distill_article:
+    self_contained: false
+    
+categories:
+  - dataviz
+  - rstats
+---
+
+The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
+
+Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
+Q2. What are changing patterns of each leading cause of death over years?  
+Q3. What are distinct causes of death in each state of the United States?  
+
+This post presents the third part of the project, in which data visualization for Q3 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the post.  
+
+Here are required packages:
+
+```{r required-package, echo=TRUE, eval=FALSE}
+
+install.packages("rio")
+install.packages("here")
+install.packages("tidyverse")
+install.packages("janitor")
+install.packages("gganimate")
+install.packages("transformr")
+install.packages("maps")
+install.packages("colorblinr")
+
+```
+
+Here is a global settings:  
+
+```{r setup, include=FALSE}
+
+library(tidyverse)
+library(rio)
+library(here)
+library(janitor)
+library(gganimate)
+library(paletteer)
+library(transformr)
+library(maps)
+library(colorblindr)
+
+knitr::opts_chunk$set(echo = FALSE,                      
+                      message = FALSE,
+                      warning = FALSE)
+```
+
+```{r import_tidy_data, include=FALSE}
+
+df <- import(here::here("data", "Leading_Causes_of_Death__United_States.csv"),
+              setclass = "tbl_df") %>% 
+  janitor::clean_names()
+
+tidy_df <- df %>% 
+  dplyr::select(year, cause_name, state, deaths, age_adjusted_death_rate) %>%   
+  mutate(cause = as_factor(cause_name),
+         state = as_factor(state),
+         #transform rate to decimal value not %
+         rate = age_adjusted_death_rate/100) %>% 
+  dplyr::select(year, state, cause, deaths, rate) %>%
+  # filter out "all causes"
+  filter(cause != "All causes",
+         state != "United States") %>%
+  # replace "CLRD" with its whole name
+  mutate(cause = replace(as.character(cause), cause == "CLRD", 
+                         "Chronic lower respiratory diseases"))
+```
+
+## Data visualization
+
+The last plot of this R project series is for both **general and academic audiences** and is to display a distinct death causes in each state.  
+
+### First plot- map data
+
+```{r plot3, fig.width=25, fig.height=35, layout = "l-body-outset", preview=TRUE}
+
+# get a map data with longitude and latitude of each state 
+
+usa <- as_tibble(map_data("state"))
+usa$region <- str_to_title(usa$region)
+usa <- usa %>%
+  rename(state = region)
+
+# create data with distinct cause of each state
+
+distinct_by_state <- tidy_df %>% 
+  # creat rank per year and state
+  group_by(year, state) %>% 
+  arrange(desc(deaths)) %>% 
+  mutate(rank = row_number()) %>% 
+  arrange(year) %>% 
+  ungroup() %>% 
+  # only select rank no. 1
+  filter(rank == 1,
+         state != "United States")
+
+#  combine the above 2 datasets together
+
+distinct_map <- full_join(usa, distinct_by_state, by = "state") %>% 
+  filter(!is.na(lat), !is.na(long), !is.na(year))
+
+
+# map data with USA states
+
+plot3 <- distinct_map  %>% 
+  mutate(cause = factor(cause, levels = c("Heart disease", "Cancer"))) %>% 
+  ggplot(aes(long, lat, group = group, fill = cause)) +
+  geom_polygon(color = "white", alpha = 0.7) +
+  scale_fill_OkabeIto() +
+  coord_map()+
+  labs(title = "A Distinct Cause of Death",
+       subtitle = "Cancer emerges as a leading cause in early 20th.",
+       caption = "Source: Centers for Disease Control and Prevention ",
+       fill = "")+
+  theme_void(base_size = 35) +
+  facet_wrap(~year, ncol = 3) +
+  theme(plot.title = element_text(face = "bold",
+                                  hjust = 0.5,
+                                  vjust = 10),
+        plot.subtitle = element_text(face = "italic",
+                                     hjust = 0.5,
+                                     vjust = 10),
+        legend.position = "top")
+
+plot3
+
+```
+
+The plot clearly delivers a messenge stated in the subtitle: cancer appears to be a distinct cause of death since early 20th. Quite interestingly, southern region does not have cancer as a distinct cause unitl 2011 and some states even maintain the same distinct cause (heart disease) throught out `r 2016-1999+1` years.    
+
+Although the plot is pretty straightforward in terms of communicating the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use `{gganimate}` again to make these map data alive!  
+
+### Second plot- **animated** map data
+
+```{r plot3_ani, layout = "l-body-outset"}
+
+ani_plot3 <- distinct_map  %>% 
+  mutate(cause = factor(cause, levels = c("Heart disease", "Cancer"))) %>% 
+  ggplot(aes(long, lat, group = group, fill = cause)) +
+  geom_polygon(color = "white", alpha = 0.7) +
+  scale_fill_OkabeIto() +
+  coord_map() +
+  theme_void() +
+  labs(title = "A Distinct Cause of Death\nCancer emerges as a leading cause in early 20th.",
+       subtitle = "Year: {round(frame_time)}",
+       caption = "Source: Centers for Disease Control and Prevention ",
+       fill = "") +
+  theme(plot.title = element_text(face = "bold",
+                                  hjust = 0.5,
+                                  vjust = 10),
+        plot.subtitle = element_text(face = "italic",
+                                     hjust = 0.5,
+                                     vjust = 10),
+        legend.position = "top") +
+  transition_time(year) +
+  ease_aes("cubic-in-out")
+
+
+
+animate(ani_plot3, 200, fps = 10, duration = 30, end_pause = 10,
+        width = 800, height = 600, 
+        renderer = gifski_renderer("plot3_ani.gif"))
+
+```
+
+
+This is actually not [the first time](https://twitter.com/ptteresachen/status/1094702611205222402) I make an animated map. I believe I'd be still struggled with the animated map if I did not find [Jordan Frey's](https://twitter.com/FreyGeospatial) [code](https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R). Hope at some point in the future my codes here will be utilized/referenced by someone :)
+
+## Conclusion  
+
+With these three parts of data visulization, I believe the original three questions are well answered.  
+
+Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
+A1: Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three times more of deaths compare to all the other causes every year. It seems Alzheimer’s disease increases its rank on the top 10 causes of death over years.  
+
+Q2. What are changing patterns of each leading cause of death over years?  
+A2: It seems heart disease, cancer and Alzheimer’s disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer’s disease increases its amount rapidly.  
+
+Q3. What are distinct causes of death in each state of the United States?  
+A3: Cancer appears to be a distinct cause of death since early 20th. The vulnerability to cancer in southern region is late and less.  
+
