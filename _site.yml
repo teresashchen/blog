@@ -1,5 +1,5 @@
 name: "11_Blog"
-title: "Teresa's Blog"
+title: "Teresa Chen"
 description: |
   Teresa's Blog
 output_dir: "docs"
@@ -9,9 +9,11 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
+    - text: "Website"
+      href: https://teresashchen.netlify.com/      
     - icon: fa fa-github
       href: https://github.com/teresashchen
-  left:
-    - text: "Test Navbar"
-      href: about.html
+    - icon: fa fa-twitter
+      href: https://twitter.com/?lang=en
+
 output: distill::distill_article

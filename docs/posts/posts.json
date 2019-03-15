@@ -1,5 +1,23 @@
 [
   {
+    "path": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/",
+    "title": "Cause of Death- {gganimate} with Geographical Data",
+    "description": "This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "author": [
+      {
+        "name": "Teresa Chen",
+        "url": "https://teresashchen.netlify.com/"
+      }
+    ],
+    "date": "2019-03-14",
+    "categories": [
+      "dataviz",
+      "rstats"
+    ],
+    "preview": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png",
+    "last_modified": "2019-03-14T17:48:46-07:00"
+  },
+  {
     "path": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/",
     "title": "Cause of Death- {gghighlight} with a Line Graph",
     "description": "This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
