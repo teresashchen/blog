@@ -54,69 +54,6 @@
     "last_modified": "2019-03-14T16:53:19-07:00"
   },
   {
-    "path": "posts/2019-03-06-another-in-class-test/",
-    "title": "another in-class test",
-    "description": "A short description of the post.",
-    "author": [
-      {
-        "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
-      }
-    ],
-    "date": "2019-03-06",
-    "categories": [],
-    "preview": "posts/2019-03-06-another-in-class-test/another-in-class-test_files/figure-html5/unnamed-chunk-1-1.png",
-    "last_modified": "2019-03-06T10:51:37-08:00"
-  },
-  {
-    "path": "posts/2019-03-06-another-post-with-a-figure/",
-    "title": "another post with a figure",
-    "description": "A short description of the post.",
-    "author": [
-      {
-        "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
-      }
-    ],
-    "date": "2019-03-06",
-    "categories": [
-      "dataviz",
-      "class"
-    ],
-    "preview": "posts/2019-03-06-another-post-with-a-figure/another-post-with-a-figure_files/figure-html5/plot1-1.png",
-    "last_modified": "2019-03-06T11:21:46-08:00"
-  },
-  {
-    "path": "posts/2019-03-06-in-class-practice/",
-    "title": "in-class practice",
-    "description": "This is another test.",
-    "author": [
-      {
-        "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
-      }
-    ],
-    "date": "2019-03-06",
-    "categories": [],
-    "preview": {},
-    "last_modified": "2019-03-06T10:35:39-08:00"
-  },
-  {
-    "path": "posts/2019-03-04-test/",
-    "title": "test",
-    "description": "Very first post.",
-    "author": [
-      {
-        "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
-      }
-    ],
-    "date": "2019-03-04",
-    "categories": [],
-    "preview": {},
-    "last_modified": "2019-03-04T12:30:44-08:00"
-  },
-  {
     "path": "posts/welcome/",
     "title": "Welcome to Teresa's Blog",
     "description": "Welcome to our new blog, Teresa's Blog. We hope you enjoy \nreading what we have to say!",

@@ -9,8 +9,8 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Website"
-      href: https://teresashchen.netlify.com/      
+    - text: "CV"
+      href: cv.html      
     - icon: fa fa-github
       href: https://github.com/teresashchen
     - icon: fa fa-twitter

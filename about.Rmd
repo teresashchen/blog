@@ -1,7 +1,7 @@
 ---
 title: "Welcome!"
 description: |
-  You would know a little bit about me and this blog here. 
+  Something about me and my blog 
 ---
 
 ```{r setup, include=FALSE}
@@ -9,16 +9,19 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-## About me  
+## Hi, I am Teresa Chen!  
 
-I am a PhD candidate in Human Physiology at the University of Oregon. I joined the Motion Analysis Lab in 2015. As a physical therapist, I aim to develop a career in the direction of mobility impairment research with translational applications to patient care or exercise performance. My research interest, specifically, focuses on age-related declines in cognitive and physical functions and their contributions to gait imbalance and falls and, ultimately, leads to new rehabilitation interventions.
+I am a PhD candidate in Human Physiology at the University of Oregon. I joined the Motion Analysis Lab in 2015. As a physical therapist, I aim to develop a career in the direction of mobility impairment research with translational applications to patient care or exercise performance. My current research, specifically, focuses on age-related declines in cognitive and physical functions and their contributions to gait imbalance and falls and, ultimately, leads to new rehabilitation interventions.
+
+My favorite sports is Olympic weight lifting, inspired by [her](https://en.wikipedia.org/wiki/Kuo_Hsing-chun) and all the other weightlifter I had been working with. I also like runnging, travling and trying all kinds of #dataviz & #rstats. 
 
 ## Milestone of the blog
 
-### Febrary, 2019
-
-This blog is created with a purpose of fullfill one of the requirment of class final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).
-
 ### March, 2019  
 
-Final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/) is done! 
+Final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/) is done!  
+
+### Febrary, 2019
+
+This blog is created with a purpose of fullfill one of the requirment of class final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). 
+

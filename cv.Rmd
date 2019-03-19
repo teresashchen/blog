@@ -1,0 +1,24 @@
+---
+title: "CV"
+description: |
+  My CV
+---
+
+```{r setup, include=FALSE}
+
+# devtools::install_github('yihui/xfun')
+# # embed_file() requires a few more packages
+# xfun::pkg_load2(c('base64enc', 'htmltools', 'mime'))
+
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+
+```{r echo=FALSE}
+# a single file
+xfun::embed_file('Curriculum vitae_Chen_031419.pdf')
+```
+
+
+<embed src= "Curriculum vitae_Chen_031419.pdf" width= "500" height= "375">

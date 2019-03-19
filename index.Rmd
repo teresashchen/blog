@@ -1,5 +1,5 @@
 ---
-title: "Teresa Chen"
+title: "a physical therapist's #dataviz practice"
 site: distill::distill_website
 listing: posts
 ---

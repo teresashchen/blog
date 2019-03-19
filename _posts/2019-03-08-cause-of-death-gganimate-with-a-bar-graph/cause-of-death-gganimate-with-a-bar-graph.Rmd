@@ -269,7 +269,7 @@ I spent a good amount of time to figure out how I could change the ranks of caus
 
 Here is the static version with only year 2016 shown in the figure:
 
-```{r plot1_v4_preview, fig.height=8, fig.width= 12, echo=FALSE, layout = "l-body-outset", preview=TRUE}
+```{r plot1_v4_preview, fig.height=10, fig.width= 15, echo=FALSE, layout = "l-body-outset", preview=TRUE}
 
 tidy_df %>% 
   filter(year == 2016) %>% 
