@@ -4,7 +4,7 @@ description: |
   Last updated: March, 2019
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, eval=FALSE}
 
 # devtools::install_github('yihui/xfun')
 # # embed_file() requires a few more packages
@@ -16,11 +16,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Download CV from here:
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # a single file
 xfun::embed_file('Curriculum vitae_Chen_031419.pdf')
 ```
 
-## Preview CV here: 
 
-<embed src= "Curriculum vitae_Chen_031419.pdf" width= "600" height= "800">
+
+<embed src= "Curriculum vitae_Chen_031419.pdf" width= "800" height= "1000">
