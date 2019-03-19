@@ -1,12 +1,12 @@
 [
   {
     "path": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/",
-    "title": "Cause of Death- {gganimate} with Geographical Data",
-    "description": "This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "title": "Distinct causes of death in each state of the United States",
+    "description": "Cause of Death- {gganimate} with Geographical Data",
     "author": [
       {
         "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
+        "url": "https://teresashchen.github.io/blog/"
       }
     ],
     "date": "2019-03-14",
@@ -15,16 +15,16 @@
       "rstats"
     ],
     "preview": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png",
-    "last_modified": "2019-03-14T17:48:47-07:00"
+    "last_modified": "2019-03-18T19:24:08-07:00"
   },
   {
     "path": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/",
-    "title": "Cause of Death- {gghighlight} with a Line Graph",
-    "description": "This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "title": "Changing patterns of each leading cause of death over years",
+    "description": "Cause of Death- {gghighlight} with a Line Graph",
     "author": [
       {
         "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
+        "url": "https://teresashchen.github.io/blog/"
       }
     ],
     "date": "2019-03-12",
@@ -33,7 +33,7 @@
       "rstats"
     ],
     "preview": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/cause-of-death-gghighlight-with-a-line-graph_files/figure-html5/plot2_v3-1.png",
-    "last_modified": "2019-03-13T16:14:37-07:00"
+    "last_modified": "2019-03-18T19:18:00-07:00"
   },
   {
     "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",

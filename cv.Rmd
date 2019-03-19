@@ -14,7 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-## Download CV from here:
 
 ```{r echo=FALSE, eval=FALSE}
 # a single file
