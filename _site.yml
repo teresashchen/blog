@@ -10,10 +10,13 @@ navbar:
     - text: "About"
       href: about.html
     - text: "CV"
-      href: cv.html      
+      href: cv.html
+    - text: "Google Scholar"
+      href: https://scholar.google.com/citations?user=rFt2sb4AAAAJ&hl=en      
     - icon: fa fa-github
       href: https://github.com/teresashchen
     - icon: fa fa-twitter
       href: https://twitter.com/?lang=en
+
 
 output: distill::distill_article

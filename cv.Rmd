@@ -1,7 +1,7 @@
 ---
 title: "CV"
 description: |
-  My CV
+  Last updated: March, 2019
 ---
 
 ```{r setup, include=FALSE}
@@ -14,11 +14,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
+## Download CV from here:
 
 ```{r echo=FALSE}
 # a single file
 xfun::embed_file('Curriculum vitae_Chen_031419.pdf')
 ```
 
+## Preview CV here: 
 
-<embed src= "Curriculum vitae_Chen_031419.pdf" width= "500" height= "375">
+<embed src= "Curriculum vitae_Chen_031419.pdf" width= "600" height= "800">

@@ -1,19 +1,22 @@
 ---
-title: "Cause of Death- {gganimate} with Geographical Data"
+title: "Distinct causes of death in each state of the United States"
 description: |
-  This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).
+  Cause of Death- {gganimate} with Geographical Data
 author:
   - name: Teresa Chen
-    url: https://teresashchen.netlify.com/
+    url: https://teresashchen.github.io/blog/
 date: 03-14-2019
 output:
   distill::distill_article:
     self_contained: false
-    
+    toc: true
+    toc_depth: 3     
 categories:
   - dataviz
   - rstats
 ---
+
+This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).  
 
 The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
 

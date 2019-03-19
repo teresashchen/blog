@@ -37,12 +37,12 @@
   },
   {
     "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",
-    "title": "Cause of Death- {gganimate} with a Bar Graph",
-    "description": "This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).",
+    "title": "How do causes of death change from 1999 to 2016?",
+    "description": "Cause of Death- {gganimate} with a Bar Graph",
     "author": [
       {
         "name": "Teresa Chen",
-        "url": "https://teresashchen.netlify.com/"
+        "url": "https://teresashchen.github.io/blog/"
       }
     ],
     "date": "2019-03-08",
@@ -51,7 +51,7 @@
       "rstats"
     ],
     "preview": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4_preview-1.png",
-    "last_modified": "2019-03-14T16:53:19-07:00"
+    "last_modified": "2019-03-18T18:51:40-07:00"
   },
   {
     "path": "posts/welcome/",
