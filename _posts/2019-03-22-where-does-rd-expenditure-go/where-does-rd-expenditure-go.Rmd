@@ -1,0 +1,216 @@
+---
+title: "How does R&D expenditure changes?"
+description: |
+  Funding resources are not looking bright for biomechanists.
+author:
+  - name: Teresa Chen
+    url: https://teresashchen.github.io/blog/
+date: 03-22-2019
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 3     
+categories:
+  - dataviz
+  - rstats
+  - biomechanics
+---
+
+This is one of my participation in [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) data visualization challenge. The data/visualization, nevertheless, is highgly related to every researcher. I am interested to know **how R&D expenditure changes over years**. Since I am a biomechanist working in academia, I also want to know **how the funding situation loos like for certain organizations where biomechanists usually get funded**.
+
+<aside>
+#TidyTuesday is a weekly event on twitter, where R users can practice their wrangling and data visualization skills with real-world data.
+</aside>
+
+
+## About the data
+
+The original data come from American Association for the Advancement of Science Historical Trends. The dataset I used for datavisualization is a *cleaned* version, which means I did not have to organize/clean several excel files to get the final dataset. Thanks to R4DS community!
+
+
+<aside>
+Details regarding the data can be found [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12).
+</aside>
+
+Let's do some #dataviz, shall we?
+
+Here are packages I used for this data visulization:
+
+```{r setup, include=TRUE, echo=TRUE}
+library(tidyverse)
+library(rio)
+library(paletteer)
+library(gghighlight)
+library(cowplot)
+
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data preparation
+
+### Import the data
+
+```{r importdata}
+
+fed_rd <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-12/fed_r_d_spending.csv")
+
+```
+
+### Tidy the data
+
+Since I am not familiar with abbreviations of all funding departments, I decide to add their names to the dataset. 
+
+I also devided R&D expenditure to GDP to get funding percentage relative to the yearly economy.
+
+```{r tidydata}
+
+abbname <- tibble(abb = c("DOD - Department of Defense",
+                      "NASA - National Aeronautics and Space Administration",
+                      "DOE - Department of Energy",
+                      "HHS - Department of Health and Human Services",
+                      "NIH - National Institute of Health",
+                      "NSF - National Science Foundation",
+                      "USDA - US Department of Agriculture",
+                      "Interior - Department of Interior",
+                      "DOT - Deparment of Transportation",
+                      "EPA - Environmental Protection Agency",
+                      "DOC - Department of Corrections",
+                      "DHS - Department of Homeland Security",
+                      "VA - Department of Veterands Affairs",
+                      "Other - other research and development spending")) %>% 
+  separate(abb, into = c("abb", "name"), sep = " - ")
+
+
+feddf <- left_join(fed_rd, abbname, by = c("department" = "abb"))
+
+feddf <- feddf %>% 
+  mutate(percent = rd_budget/gdp)
+
+# skimr::skim(fed_rd)
+
+```
+
+## Data visualization 1- heat map
+
+```{r plot1, fig.width = 25, fig.height = 10, layout = "l-page", preview=TRUE}
+
+
+#plot heatmap
+
+feddf %>% 
+  ggplot(aes(x = year, y = fct_reorder(name, percent))) +
+  geom_tile(aes(fill = percent*100),
+            color = "white",
+            alpha = 0.8) +
+  scale_fill_paletteer_c(scico, roma) +
+  coord_equal() +
+  scale_x_continuous(breaks = seq(1976, 2017, 5),
+                     expand = c(0, 0)) +
+  theme_minimal(base_size = 25) +
+  theme(panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        plot.title = element_text(hjust = 0.5,
+                                  vjust = 10,
+                                  face = "bold")) +
+  labs(fill = "",
+       x = "",
+       y = "",
+       title = "R&D funding as a percent of GDP",
+       caption = "American Association for the Advancement of Science")
+
+ggsave("plot0.png", width = 25, height = 10, dpi = 150, units = "in")  
+```
+
+DoD stands out from all the other agencies to fund more R&D projects, although the percentage is still low relative to GDP.
+
+## Data visualization 2
+
+### line graph 1
+
+Here I focused on graphing percentage R&D expenditure and used `{gghightlight}` to stand out four departments where biomechanists typically get grant from. 
+
+```{r plot2, fig.height = 15, fig.width = 15}
+
+# plot line graph with percentage
+
+plot1 <- feddf %>% 
+  ggplot(aes(x = year, y = percent, color = name)) +
+  geom_line(size = 2) +
+  scale_color_paletteer_d(ochRe, nolan_ned) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(breaks = seq(1976, 2018, 5),
+                     expand = c(0, 0)) +
+  gghighlight(name == "National Institute of Health" |
+              name == "National Science Foundation" |
+              name == "Department of Health and Human Services" |
+              name == "Department of Defense",
+              use_group_by = FALSE,
+              use_direct_label = FALSE) +
+  theme_minimal(base_size = 18) +
+  labs(y = "% of GDP",
+       x = "Year",
+       color = "Department") +
+  theme(legend.justification = c(1, 0.1))
+
+plot1
+
+```
+
+### line graph 2
+
+Instead of using percentage, I plotted R&D expenditure in dollars.
+
+```{r fig.height = 15, fig.width = 15}
+
+# plot line graph with dollars
+
+plot2 <- feddf %>% 
+  ggplot(aes(x = year, y = rd_budget/1000000000, color = name)) +
+  geom_line(size = 2) +
+  scale_color_paletteer_d(ochRe, nolan_ned) +
+  scale_y_continuous(labels = scales::dollar) +
+  scale_x_continuous(breaks = seq(1976, 2018, 5),
+                     expand = c(0, 0)) +
+  gghighlight(name == "National Institute of Health" |
+              name == "National Science Foundation" |
+              name == "Department of Health and Human Services" |
+              name == "Department of Defense",
+              use_group_by = FALSE,
+              use_direct_label = FALSE) +
+  theme_minimal(base_size = 18) +
+  labs(y = "$USD (billions)",
+       x = "",
+       color = "Department") +
+  theme(legend.justification = c(1, 0.1))
+
+plot2
+```
+
+### Cow plot
+
+It's simply a combination plot of line plot 1 and line plot 2. I think putting 2 plots together can make the story more complete.  Highly recommend `{cowplot}` here to make combining plots super straightforward!
+
+```{r fig.height = 15, fig.width = 15}
+
+# comebine 2 line graphs
+
+plot3 <- plot_grid(plot2, plot1, labels = c("A", "B"), nrow = 2, align = "v")
+title <- ggdraw() + 
+  draw_label("R&D expenditure \nHighlight 4 agencies where biomechanists usually get grant from",
+             fontface = 'bold',
+             size = 20)
+
+plot3 <- plot_grid(title, plot3, ncol = 1, rel_heights = c(0.1, 1))
+
+save_plot("plot3.png", plot3,
+          ncol = 2, # we're saving a grid plot of 2 columns
+          nrow = 2, # and 2 rows
+          # each individual subplot should have an aspect ratio of 1.3
+          base_aspect_ratio = 1.3
+          )
+
+plot3
+```
+
+Although the expenditure (money-wise) went up, the percentage relative to GDP went down. 
