@@ -55,7 +55,7 @@ library(transformr)
 library(maps)
 library(colorblindr)
 
-knitr::opts_chunk$set(echo = FALSE,                      
+knitr::opts_chunk$set(echo = TRUE,                      
                       message = FALSE,
                       warning = FALSE)
 ```
