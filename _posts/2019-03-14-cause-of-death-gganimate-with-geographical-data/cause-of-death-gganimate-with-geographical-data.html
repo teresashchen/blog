@@ -997,12 +997,89 @@ install.packages(&quot;colorblinr&quot;)</code></pre>
 <p>The last plot of this R project series is for both <strong>general and academic audiences</strong> and is to display a distinct death causes in each state.</p>
 <h3 id="first-plot--map-data">First plot- map data</h3>
 <div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+# get a map data with longitude and latitude of each state 
+
+usa &lt;- as_tibble(map_data(&quot;state&quot;))
+usa$region &lt;- str_to_title(usa$region)
+usa &lt;- usa %&gt;%
+  rename(state = region)
+
+# create data with distinct cause of each state
+
+distinct_by_state &lt;- tidy_df %&gt;% 
+  # creat rank per year and state
+  group_by(year, state) %&gt;% 
+  arrange(desc(deaths)) %&gt;% 
+  mutate(rank = row_number()) %&gt;% 
+  arrange(year) %&gt;% 
+  ungroup() %&gt;% 
+  # only select rank no. 1
+  filter(rank == 1,
+         state != &quot;United States&quot;)
+
+#  combine the above 2 datasets together
+
+distinct_map &lt;- full_join(usa, distinct_by_state, by = &quot;state&quot;) %&gt;% 
+  filter(!is.na(lat), !is.na(long), !is.na(year))
+
+
+# map data with USA states
+
+plot3 &lt;- distinct_map  %&gt;% 
+  mutate(cause = factor(cause, levels = c(&quot;Heart disease&quot;, &quot;Cancer&quot;))) %&gt;% 
+  ggplot(aes(long, lat, group = group, fill = cause)) +
+  geom_polygon(color = &quot;white&quot;, alpha = 0.7) +
+  scale_fill_OkabeIto() +
+  coord_map()+
+  labs(title = &quot;A Distinct Cause of Death&quot;,
+       subtitle = &quot;Cancer emerges as a leading cause in early 20th.&quot;,
+       caption = &quot;Source: Centers for Disease Control and Prevention &quot;,
+       fill = &quot;&quot;)+
+  theme_void(base_size = 35) +
+  facet_wrap(~year, ncol = 3) +
+  theme(plot.title = element_text(face = &quot;bold&quot;,
+                                  hjust = 0.5,
+                                  vjust = 10),
+        plot.subtitle = element_text(face = &quot;italic&quot;,
+                                     hjust = 0.5,
+                                     vjust = 10),
+        legend.position = &quot;top&quot;)
+
+plot3</code></pre>
 <p><img src="cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png" width="2400" data-distill-preview=1 /></p>
 </div>
 <p>The plot clearly delivers a messenge stated in the subtitle: cancer appears to be a distinct cause of death since early 20th. Quite interestingly, southern region does not have cancer as a distinct cause unitl 2011 and some states even maintain the same distinct cause (heart disease) throught out 18 years.</p>
 <p>Although the plot is pretty straightforward in terms of communicating the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use <code>{gganimate}</code> again to make these map data alive!</p>
 <h3 id="second-plot--animated-map-data">Second plot- <strong>animated</strong> map data</h3>
 <div class="layout-chunk" data-layout="l-body-outset">
+<pre class="r"><code>
+ani_plot3 &lt;- distinct_map  %&gt;% 
+  mutate(cause = factor(cause, levels = c(&quot;Heart disease&quot;, &quot;Cancer&quot;))) %&gt;% 
+  ggplot(aes(long, lat, group = group, fill = cause)) +
+  geom_polygon(color = &quot;white&quot;, alpha = 0.7) +
+  scale_fill_OkabeIto() +
+  coord_map() +
+  theme_void() +
+  labs(title = &quot;A Distinct Cause of Death\nCancer emerges as a leading cause in early 20th.&quot;,
+       subtitle = &quot;Year: {round(frame_time)}&quot;,
+       caption = &quot;Source: Centers for Disease Control and Prevention &quot;,
+       fill = &quot;&quot;) +
+  theme(plot.title = element_text(face = &quot;bold&quot;,
+                                  hjust = 0.5,
+                                  vjust = 10),
+        plot.subtitle = element_text(face = &quot;italic&quot;,
+                                     hjust = 0.5,
+                                     vjust = 10),
+        legend.position = &quot;top&quot;) +
+  transition_time(year) +
+  ease_aes(&quot;cubic-in-out&quot;)
+
+
+
+animate(ani_plot3, 200, fps = 10, duration = 30, end_pause = 10,
+        width = 800, height = 600, 
+        renderer = gifski_renderer(&quot;plot3_ani.gif&quot;))</code></pre>
 <p><img src="cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3_ani-1.gif" /><!-- --></p>
 </div>
 <p>This is actually not <a href="https://twitter.com/ptteresachen/status/1094702611205222402">the first time</a> I make an animated map. I believe I’d be still struggled with the animated map if I did not find <a href="https://twitter.com/FreyGeospatial">Jordan Frey’s</a> <a href="https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R">code</a>. Hope at some point in the future my codes here will be utilized/referenced by someone :)</p>
