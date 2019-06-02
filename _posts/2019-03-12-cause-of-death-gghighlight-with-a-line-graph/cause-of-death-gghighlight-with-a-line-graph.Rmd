@@ -1,5 +1,5 @@
 ---
-title: "Changing patterns of each leading cause of death over years"
+title: "Changing patterns of leading causes of death over time"
 description: |
   Cause of Death- {gghighlight} with a Line Graph
 author:
@@ -16,17 +16,17 @@ categories:
   - rstats
 ---
 
-This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). 
+This is part 2 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). In addition to answering the questions regarding causes of death using real data, I also hope to facilitate data analysis using R by documenting the steps leading towards the final results. 
 
 The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
 
-Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
-Q2. What are changing patterns of each leading cause of death over years?  
-Q3. What are distinct causes of death in each state of the United States?  
+Q1. How do leading causes of death change over the past `r 2016-1999+1` years?  
+Q2. What are the changing patterns of each leading cause of death over the years?  
+Q3. What are the distinct causes of death in each state in the United States?  
 
-This post presents the second part of the project, in which data visualization for Q2 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the post.  
+This post presents the second part of the project, in which data visualization for Q2 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the project.  
 
-Here are required packages:
+Here are the required packages:
 
 ```{r required-package, echo=TRUE, eval=FALSE}
 
@@ -40,7 +40,7 @@ install.packages("colorblinr")
 
 ```
 
-Here is a global settings:
+Here are the global settings:
 
 ```{r setup, echo=TRUE}
 
@@ -81,7 +81,7 @@ tidy_df <- df %>%
 
 ## Data visualization 
 
-The second plot of this R project series is for **policy-maker or health-related researcher** and is a quick summary plot regarding changes in causes of death over years. 
+The second plot of this R project series are for **policy-makers and health-related researchers**. This is a quick summary plot regarding changes in causes of death over the years. 
 
 ### First plot- line graph with annotation
 
@@ -112,8 +112,8 @@ tidy_df %>%
           legend.key.size = unit(3, 'lines'),
           plot.title = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic")) +
-    labs(title = "Causes of Death Across Years",
-         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+    labs(title = "Causes of Death Across Time",
+         subtitle = "Top 2 causes of death are heart disease and cancer.\nAlzheimer's disease increases rapidly.",
          x = "Year",
          y = "No. of deaths (in 10k)",
          caption = "Source: Centers for Disease Control and Prevention ")
@@ -123,9 +123,11 @@ tidy_df %>%
   
 ```
 
-From the plot it is easy to tell the changes in number of death across years. Some dieases show an increased number (suicide, kidney disease, diabetes, Alzheimer's disease, chronic lower respiratory disease, unintentional injuries), some disease show a decreased number (influenza and pneumonia, stroke, heart disease) while some does not change to much (cancer).
+From the plot it is easy to tell the changes in number of deaths across the years. Some diseases show increased numbers (suicide, kidney disease, diabetes, Alzheimer's disease, chronic lower respiratory disease, unintentional injuries), some diseases show decreased numbers (influenza and pneumonia, stroke, heart disease) while some do not change much (cancer).
 
-The cons of this plot is the texts annotating causes are overlapped. I have tried to maximize the figure height and space out each line to avoid the issue without distorting a figure ratio to musch, but the problem remains the same to some texts. For example, "Influenza and pneumonia" is on top of "Kidney disease". So how about getting rid of the text then? 
+The cons of this plot is that the texts annotating causes are overlapped. I have tried to maximize the figure height and spaces between each disease to solve this overlapping issue without distorting the figure too much, although the problem remains the same in some texts. For example, the label of "Influenza and pneumonia" is overlapping "Kidney disease". 
+
+So how about looking into a way to get rid of the text? 
 
 
 ### Second plot- line plot with a color legend
@@ -151,8 +153,8 @@ tidy_df %>%
           legend.key.size = unit(3, 'lines'),
           plot.title = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic")) +
-    labs(title = "Causes of Death Across Years",
-         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+    labs(title = "Causes of Death Across Time",
+         subtitle = "Top 2 causes of death are heart disease and cancer.\nAlzheimer's disease increases rapidly.",
          x = "Year",
          y = "No. of deaths (in 10k)",
          caption = "Source: Centers for Disease Control and Prevention ",
@@ -160,7 +162,7 @@ tidy_df %>%
 ```
 
 
-Although the texts of each cause are legible in the color legend now, a total of 10 colors definitly increases audiences' cognitive loads. The other concern is that there is no color-blind-friendly qualitative palette out there that has more than 10 colors. Therefore, inspired by peer reviewrs' suggestion, I decide to use `{gghighlight}` to select three causes of interest and plot these three causes with color-blind-friendly palette `colorblindr::scale_color_OkabeIto()`in the final version of plot below. Note that `scale_color_OkabeIto` needs additional two packages `{cowplot}` and `{colorspace}` to make the palette work. Here is the [detail](https://www.rdocumentation.org/packages/colorblindr/versions/0.1.0). 
+Although the texts of each cause are legible in the color legend now, a total of 10 colors definitly increases audiences' cognitive loads. The other concern is that there is no color-blind-friendly qualitative palette out there that has more than 10 colors. Therefore, I decided to use `{gghighlight}` to select three causes of interest and plot these three causes with a color-blind-friendly palette `colorblindr::scale_color_OkabeIto()`in the final version of plot below. Note that `scale_color_OkabeIto` needs additional two packages `{cowplot}` and `{colorspace}` to make the palette work. Here are the [details](https://www.rdocumentation.org/packages/colorblindr/versions/0.1.0). 
 
 
 ```{r plot2_v3, fig.width=10, fig.height=8, layout = "l-body-outset", preview=TRUE}
@@ -189,8 +191,8 @@ tidy_df %>%
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = "bold"),
           plot.subtitle = element_text(face = "italic")) +
-    labs(title = "Causes of Death Across Years",
-         subtitle = "Heart disease and cancer are top 2 causes of deaths.\nAlzheimer's disease increases rapidly.",
+    labs(title = "Causes of Death Across Time",
+         subtitle = "Top 2 causes of death are heart disease and cancer.\nAlzheimer's disease increases rapidly.",
          x = "Year",
          y = "No. of deaths (in 10k)",
          caption = "Source: Centers for Disease Control and Prevention ",
@@ -200,7 +202,7 @@ tidy_df %>%
 
 ## Conclusion
 
-The second #dataviz of this R project is intended to policty-makers and/or researchers to see the overall changes of causes of death across years. It seems heart disease, cancer and Alzheimer's disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer's disease increases its amount rapidly. 
+This post is intended for policy-makers and/or researchers to see the overall changes of causes of death across the years. Heart disease, cancer and Alzheimer's disease are the three causes that need most attention in disease intervention and prevention. Heart disease and cancer are the top two distinct causes of death over time and Alzheimer's disease increases rapidly. 
 
 
 

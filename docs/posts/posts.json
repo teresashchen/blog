@@ -38,7 +38,7 @@
   },
   {
     "path": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/",
-    "title": "Changing patterns of each leading cause of death over years",
+    "title": "Changing patterns of leading causes of death over time",
     "description": "Cause of Death- {gghighlight} with a Line Graph",
     "author": [
       {
@@ -52,7 +52,7 @@
       "rstats"
     ],
     "preview": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/cause-of-death-gghighlight-with-a-line-graph_files/figure-html5/plot2_v3-1.png",
-    "last_modified": "2019-03-18T19:18:00-07:00"
+    "last_modified": "2019-06-02T13:25:49-07:00"
   },
   {
     "path": "posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/",
