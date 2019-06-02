@@ -16,17 +16,17 @@ categories:
   - rstats
 ---
 
-This is part 1 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).  
+This is part 1 of the final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). In addition to answering the questions regarding causes of death using real data, I also hope to facilitate data analysis using R by documenting the steps leading towards the final results. 
 
 The dataset, called “Leading Causes of Death: United States” was published by [Centers for Disease Control and Prevention](https://www.data.gov/). The data presents age-adjusted death rates for 10 leading causes of death in the United States from 1999 to 2016. According to the [publisher](https://catalog.data.gov/dataset/age-adjusted-death-rates-for-the-top-10-leading-causes-of-death-united-states-2013), the data are based on the information from all resident death certificates filed in the 50 states and the District of Columbia using demographic and medical characteristics.
 
 The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
 
-Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
-Q2. What are changing patterns of each leading cause of death over years?  
-Q3. What are distinct causes of death in each state of the United States?  
+Q1. How do leading causes of death change over the past `r 2016-1999+1` years?  
+Q2. What are the changing patterns of each leading cause of death over the years?  
+Q3. What are the distinct causes of death in each state in the United States?  
 
-This post presents the first part of the project, in which data visualization for Q1 is shown along with steps leading to the final plot.  
+This post presents the first part of the project, in which data visualization for Q1 is shown along with the steps leading to the final plot.  
 
 First, required packages are as follows:  
 
@@ -75,7 +75,7 @@ str(df)
 
 ## Data overview
 
-The original dataset contains 6 variables, including `r colnames(df)`. Before visiualizing data, I always find useful to clean dataset and do the following steps:  
+The original dataset contains 6 variables, including `r colnames(df)`. Before visiualizing data, I always find it useful to clean the dataset and do the following steps:  
 
 1. `dplyr::select` useful variables  
   
@@ -115,7 +115,7 @@ skim(tidy_df)
 
 ## Data visulization  
 
-The first #dataviz of this R project is intended to deliver a message to **general population** and to answer *how leading death causes change over years*. In addition to showing the final plot, I include all iterations of plots and broke down the problem into sub-problems/versions leading up to my final plot.  
+The first #dataviz of this R project is intended to deliver a message to the **general population** and to answer *how leading causes of death change over the years*. In addition to showing the final plot, I include all iterations of plots and broke down the problem into sub-problems/versions leading up to my final plot.  
 
 
 ### First plot- bar chart 
@@ -138,8 +138,8 @@ plot1_v1 <- tidy_df %>%
     theme(panel.grid.minor = element_blank(),
           plot.title = element_text(face = "bold")) +
     labs(y = "No. of deaths (in 100k)",
-         x = "Causes of deaths",
-         title = "Heart disease is a leading cause of death over years",
+         x = "Causes of death",
+         title = "Heart Disease is a Leading Cause of Death Over Time",
          caption = "Source: Centers for Disease Control and Prevention")
          
 
@@ -148,10 +148,11 @@ plot1_v1
 
 ### Second plot- bar chart with colors  
 
-From the graph it is easy to tell heart disease is shown to be a leading cause of death over years while cancer is a close number 2.
+From the graph it is easy to tell heart disease is the leading cause of death over the years while cancer is a close second.
 
-One feedback from a peer reviewer is the single color on the chart. One palette I originally plan to use is `colorblindr::scale_fill_OkabeIto`, but it has only 8 colors while there are 10 causes of death to be plot. I end up using one of the diverging palette from [colorbrewer 2.0](http://colorbrewer2.org/#type=diverging&scheme=BrBG&n=10).
+A drawback of this chart is the use of a single color. 
 
+My original plan was to use `colorblindr::scale_fill_OkabeIto`, but it has only 8 colors while there are 10 causes of death to be plotted. I end up using one of the diverging palette from [colorbrewer 2.0](http://colorbrewer2.org/#type=diverging&scheme=BrBG&n=10).
 
 
 ```{r plot1_v1_r1, fig.width=15, fig.height=20, layout = "l-body-outset"}
@@ -176,7 +177,7 @@ tidy_df %>%
           legend.position = "none") +
     labs(y = "No. of deaths (in 100k)",
          x = " ",
-         title = "Heart disease is a leading cause of death over years",
+         title = "Heart Disease is a Leading Cause of Death Over Time",
          caption = "Source: Centers for Disease Control and Prevention")
          
 
@@ -185,7 +186,7 @@ tidy_df %>%
 
 ### Third plot- **animated** bar chart
 
-Although the top 2 causes have a clear trend and rank over years, a total of 18 facets make it hard to compare amounts of death and ranks of causes across years. Therefore I used `{gganimate}` package to condense information to a single year and animate changes over years. 
+Although the top 2 causes of death have a clear trend and ranking over the years, a total of 18 facets make it hard to compare the amounts of death and rankings over the years. Therefore I used `{gganimate}` package to condense the information to a single year and animate changes over the years. 
 
 
 ```{r plot1_v2, layout = "l-body-outset"}
@@ -206,7 +207,7 @@ plot1_v2 <- tidy_df %>%
           plot.margin = margin(1, 0, 1, 0.3, "cm"),
           legend.position = "none") +
     transition_time(year) +
-    labs(title = "Top 10 Causes of Deaths",
+    labs(title = "Top 10 Causes of Death",
          subtitle = "Year: {round(frame_time)}",
          caption = "Source: Centers for Disease Control and Prevention",
          y = "No. of deaths (in 100k)",
@@ -219,9 +220,9 @@ animate(plot1_v2, duration = 25, nframes = 100, end_pause = 10,
 ```
 
 
-### Forth plot- **rank** chart
+### Forth plot- **ranking** chart
 
-Although the animation shows clear changes in amount of death across years, the  rank of causes did not demonstrated properly on y-axis even using `fct_reorder`. Therefore, here is another version:
+Although the animation shows clear changes in the amount of deaths across the years, the rankings did not demonstrat properly on the y-axis even using `fct_reorder`. Therefore, here is another version:
 
 
 ```{r plot1_v3, layout = "l-body-outset"}
@@ -263,11 +264,11 @@ animate(plot1_v3, duration = 30, nframes = 300,
 
 ### Fifth chart- animated **sorted** bar chart  
 
-This version of data visualization allows us to see changes in rank of causes over years, for example, the rank of Alzheimer's disease increased from 2003-2004 and 2006-2007. Nevertheless, My peer reviewr and I both prefer the previous version because it provides more info in terms of how far ahead one cause is from another cause. 
+This version of data visualization allows us to see change in rankings over the years. For example, Alzheimer's disease increased from 2003-2004 and from 2006-2007. The previous version, however, provides more info in terms of how far ahead one cause is from another cause. 
 
-I spent a good amount of time to figure out how I could change the ranks of cause over y-axis. This [stackoverflow thread](https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other) exactly teaches me how to do it.  
+This [stackoverflow thread](https://stackoverflow.com/questions/53162821/animated-sorted-bar-chart-with-bars-overtaking-each-other) taught me how I could change the ranks of causes of death over y-axis.  
 
-Here is the static version with only year 2016 shown in the figure:
+Here is the static version with only the year 2016 shown in the figure:
 
 ```{r plot1_v4_preview, fig.height=10, fig.width= 12, echo=FALSE, layout = "l-body-outset", preview=TRUE}
 
@@ -355,10 +356,12 @@ animate(plot1_ani, 200, fps = 10, duration = 30, end_pause = 10,
 
 ```
 
-The key feature here is to use `geom_tile` to allow the bars slide positions. Other things I've learned through this plot are the use of `clip = "off"` in `coord_flip`, which allows drawing of data points anywhere on the plot and the use of `expand = FALSE` to add a small expansion factor to the limits to ensure that data and axes don't overlap.
+The key feature here is to use `geom_tile` to allow the bars to slide positions. Through this plot, I've learned the use of `clip = "off"` in `coord_flip`, which allows drawing of data points anywhere on the plot and the use of `expand = FALSE` to add a small expansion factor to the limits to ensure that data and axes don't overlap.
 
 ## Conclusion  
 
-The first #dataviz of this R project is intended to deliver a message to general audience. Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three times more of deaths compare to all the other causes every year. It seems Alzheimer's disease increases its rank on the top 10 causes of death over years. 
+This post is intended to deliver an important message to the general community.
+
+Heart disease is a leading cause of death over the years and cancer is the second highest. The number of deaths from the top two causes are three times more than the sum of deaths from all other causes each year. It seems like Alzheimer's disease is climbing up on its ranking over the years. 
 
 
