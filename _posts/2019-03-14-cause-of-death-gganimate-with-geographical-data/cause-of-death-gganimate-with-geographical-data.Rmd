@@ -16,17 +16,17 @@ categories:
   - rstats
 ---
 
-This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).  
+This is part 3 of final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/). In addition to answering the questions regarding causes of death using real data, I also hope to facilitate data analysis using R by documenting the steps leading towards the final results.   
 
-The R project aims to answer the following three questions by demonstrating three main data vidualizations:  
+The R project aims to answer the following three questions by demonstrating three main data visualizations:  
 
-Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
-Q2. What are changing patterns of each leading cause of death over years?  
-Q3. What are distinct causes of death in each state of the United States?  
+Q1. How do leading causes of death change over the past `r 2016-1999+1` years?  
+Q2. What are changing patterns of each leading cause of death over the years?  
+Q3. What are the distinct causes of death in each state of the United States?  
 
-This post presents the third part of the project, in which data visualization for Q3 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the post.  
+This post presents data visualization for Q3. For steps leading to the plot, including data preparation and tidy data, please refer to [part 1](https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/) of the post.  
 
-Here are required packages:
+Here are the required packages:
 
 ```{r required-package, echo=TRUE, eval=FALSE}
 
@@ -83,7 +83,7 @@ tidy_df <- df %>%
 
 ## Data visualization
 
-The last plot of this R project series is for both **general and academic audiences** and is to display a distinct death causes in each state.  
+The last plot of this R project series is for a **general and academic audience** and to display distinct and leading causes of death in each state.  
 
 ### First plot- map data
 
@@ -123,8 +123,8 @@ plot3 <- distinct_map  %>%
   geom_polygon(color = "white", alpha = 0.7) +
   scale_fill_OkabeIto() +
   coord_map()+
-  labs(title = "A Distinct Cause of Death",
-       subtitle = "Cancer emerges as a leading cause in early 20th.",
+  labs(title = "Leading Causes of Death",
+       subtitle = "Cancer emerges as a leading cause in the early 2000's.",
        caption = "Source: Centers for Disease Control and Prevention ",
        fill = "")+
   theme_void(base_size = 35) +
@@ -141,9 +141,9 @@ plot3
 
 ```
 
-The plot clearly delivers a messenge stated in the subtitle: cancer appears to be a distinct cause of death since early 20th. Quite interestingly, southern region does not have cancer as a distinct cause unitl 2011 and some states even maintain the same distinct cause (heart disease) throught out `r 2016-1999+1` years.    
+The plot clearly illustrates the pattern observed in the subtitle: cancer appears to be a distinct cause of death since the early 2000's. Interestingly, southern regions did not have cancer as a distinct cause unitl 2008 with some states maintaining the same distinct cause (heart disease) throughout `r 2016-1999+1` years.    
 
-Although the plot is pretty straightforward in terms of communicating the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use `{gganimate}` again to make these map data alive!  
+Although the plot effectively communicates the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use `{gganimate}` again to turn the data maps alive!  
 
 ### Second plot- **animated** map data
 
@@ -179,18 +179,18 @@ animate(ani_plot3, 200, fps = 10, duration = 30, end_pause = 10,
 ```
 
 
-This is actually not [the first time](https://twitter.com/ptteresachen/status/1094702611205222402) I make an animated map. I believe I'd be still struggled with the animated map if I did not find [Jordan Frey's](https://twitter.com/FreyGeospatial) [code](https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R). Hope at some point in the future my codes here will be utilized/referenced by someone :)
+This is not [the first time](https://twitter.com/ptteresachen/status/1094702611205222402) I have created an animated map. I would still be struggling with the process of designing an animated map if it were not for [Jordan Frey's](https://twitter.com/FreyGeospatial) [code](https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R). Hope at some point in the future my codes provided here will be utilized/referenced by someone :)
 
 ## Conclusion  
 
-With these three parts of data visulization, I believe the original three questions are well answered.  
+With these three parts of data visulization, now the original three questions can be properly answered.  
 
-Q1. How do leading causes of death change over past `r 2016-1999+1` years?  
-A1: Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three times more of deaths compare to all the other causes every year. It seems Alzheimer’s disease increases its rank on the top 10 causes of death over years.  
+Q1. How do leading causes of death change over the past `r 2016-1999+1` years?  
+A1: Heart disease is a leading cause of death over the years and cancer is the second highest. The sum of these top two causes of deaths are three times more compared to the sum of all other causes of death each year. It seems like Alzheimer’s disease is climbing up on its rank in the top 10 causes of death over the years.  
 
-Q2. What are changing patterns of each leading cause of death over years?  
-A2: It seems heart disease, cancer and Alzheimer’s disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer’s disease increases its amount rapidly.  
+Q2. What are the changing patterns of each leading cause of death over the years?  
+A2: It seems heart disease, cancer and Alzheimer’s disease are three causes that need most research resources in disease intervention and prevention. Heart disease and cancer are the top two distinct causes of death over the years with Alzheimer’s disease increasing rapidly.  
 
-Q3. What are distinct causes of death in each state of the United States?  
-A3: Cancer appears to be a distinct cause of death since early 20th. The vulnerability to cancer in southern region is late and less.  
+Q3. What are the distinct causes of death in each state in the United States?  
+A3: Cancer appears to be a distinct cause of death since the early 2000's. The southern region displays late and lesser number of cancer cases overall. 
 

@@ -974,13 +974,13 @@
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This is part 3 of final project in <a href="https://uo-datasci-specialization.github.io/c2-communicate_transform_data/">Communicating and Transforming Data</a>.</p>
-<p>The R project aims to answer the following three questions by demonstrating three main data vidualizations:</p>
-<p>Q1. How do leading causes of death change over past 18 years?<br />
-Q2. What are changing patterns of each leading cause of death over years?<br />
-Q3. What are distinct causes of death in each state of the United States?</p>
-<p>This post presents the third part of the project, in which data visualization for Q3 is shown. For steps leading to the plot, including data preparation and tidy data, please refer to <a href="https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/">part 1</a> of the post.</p>
-<p>Here are required packages:</p>
+<p>This is part 3 of final project in <a href="https://uo-datasci-specialization.github.io/c2-communicate_transform_data/">Communicating and Transforming Data</a>. In addition to answering the questions regarding causes of death using real data, I also hope to facilitate data analysis using R by documenting the steps leading towards the final results.</p>
+<p>The R project aims to answer the following three questions by demonstrating three main data visualizations:</p>
+<p>Q1. How do leading causes of death change over the past 18 years?<br />
+Q2. What are changing patterns of each leading cause of death over the years?<br />
+Q3. What are the distinct causes of death in each state of the United States?</p>
+<p>This post presents data visualization for Q3. For steps leading to the plot, including data preparation and tidy data, please refer to <a href="https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/">part 1</a> of the post.</p>
+<p>Here are the required packages:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 install.packages(&quot;rio&quot;)
@@ -994,7 +994,7 @@ install.packages(&quot;colorblinr&quot;)</code></pre>
 </div>
 <p>Here is a global settings:</p>
 <h2 id="data-visualization">Data visualization</h2>
-<p>The last plot of this R project series is for both <strong>general and academic audiences</strong> and is to display a distinct death causes in each state.</p>
+<p>The last plot of this R project series is for a <strong>general and academic audience</strong> and to display distinct and leading causes of death in each state.</p>
 <h3 id="first-plot--map-data">First plot- map data</h3>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
@@ -1032,8 +1032,8 @@ plot3 &lt;- distinct_map  %&gt;%
   geom_polygon(color = &quot;white&quot;, alpha = 0.7) +
   scale_fill_OkabeIto() +
   coord_map()+
-  labs(title = &quot;A Distinct Cause of Death&quot;,
-       subtitle = &quot;Cancer emerges as a leading cause in early 20th.&quot;,
+  labs(title = &quot;Leading Causes of Death&quot;,
+       subtitle = &quot;Cancer emerges as a leading cause in the early 2000&#39;s.&quot;,
        caption = &quot;Source: Centers for Disease Control and Prevention &quot;,
        fill = &quot;&quot;)+
   theme_void(base_size = 35) +
@@ -1049,8 +1049,8 @@ plot3 &lt;- distinct_map  %&gt;%
 plot3</code></pre>
 <p><img src="cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png" width="2400" data-distill-preview=1 /></p>
 </div>
-<p>The plot clearly delivers a messenge stated in the subtitle: cancer appears to be a distinct cause of death since early 20th. Quite interestingly, southern region does not have cancer as a distinct cause unitl 2011 and some states even maintain the same distinct cause (heart disease) throught out 18 years.</p>
-<p>Although the plot is pretty straightforward in terms of communicating the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use <code>{gganimate}</code> again to make these map data alive!</p>
+<p>The plot clearly illustrates the pattern observed in the subtitle: cancer appears to be a distinct cause of death since the early 2000’s. Interestingly, southern regions did not have cancer as a distinct cause unitl 2008 with some states maintaining the same distinct cause (heart disease) throughout 18 years.</p>
+<p>Although the plot effectively communicates the information, the space that needs to contain the plot is a concern due to the fact that there are so many facets. Therefore, I use <code>{gganimate}</code> again to turn the data maps alive!</p>
 <h3 id="second-plot--animated-map-data">Second plot- <strong>animated</strong> map data</h3>
 <div class="layout-chunk" data-layout="l-body-outset">
 <pre class="r"><code>
@@ -1082,15 +1082,15 @@ animate(ani_plot3, 200, fps = 10, duration = 30, end_pause = 10,
         renderer = gifski_renderer(&quot;plot3_ani.gif&quot;))</code></pre>
 <p><img src="cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3_ani-1.gif" /><!-- --></p>
 </div>
-<p>This is actually not <a href="https://twitter.com/ptteresachen/status/1094702611205222402">the first time</a> I make an animated map. I believe I’d be still struggled with the animated map if I did not find <a href="https://twitter.com/FreyGeospatial">Jordan Frey’s</a> <a href="https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R">code</a>. Hope at some point in the future my codes here will be utilized/referenced by someone :)</p>
+<p>This is not <a href="https://twitter.com/ptteresachen/status/1094702611205222402">the first time</a> I have created an animated map. I would still be struggling with the process of designing an animated map if it were not for <a href="https://twitter.com/FreyGeospatial">Jordan Frey’s</a> <a href="https://github.com/jmfrey/TidyTuesday_feb0519/blob/master/R/munge.R">code</a>. Hope at some point in the future my codes provided here will be utilized/referenced by someone :)</p>
 <h2 id="conclusion">Conclusion</h2>
-<p>With these three parts of data visulization, I believe the original three questions are well answered.</p>
-<p>Q1. How do leading causes of death change over past 18 years?<br />
-A1: Heart disease is a leading cause of death over years and cancer is the second of highest. The top two causes individually take three times more of deaths compare to all the other causes every year. It seems Alzheimer’s disease increases its rank on the top 10 causes of death over years.</p>
-<p>Q2. What are changing patterns of each leading cause of death over years?<br />
-A2: It seems heart disease, cancer and Alzheimer’s disease are three causes that need most research resources in disease intervention and prevention, as first two disease are the top two distinct causes of death over years and Alzheimer’s disease increases its amount rapidly.</p>
-<p>Q3. What are distinct causes of death in each state of the United States?<br />
-A3: Cancer appears to be a distinct cause of death since early 20th. The vulnerability to cancer in southern region is late and less.</p>
+<p>With these three parts of data visulization, now the original three questions can be properly answered.</p>
+<p>Q1. How do leading causes of death change over the past 18 years?<br />
+A1: Heart disease is a leading cause of death over the years and cancer is the second highest. The sum of these top two causes of deaths are three times more compared to the sum of all other causes of death each year. It seems like Alzheimer’s disease is climbing up on its rank in the top 10 causes of death over the years.</p>
+<p>Q2. What are the changing patterns of each leading cause of death over the years?<br />
+A2: It seems heart disease, cancer and Alzheimer’s disease are three causes that need most research resources in disease intervention and prevention. Heart disease and cancer are the top two distinct causes of death over the years with Alzheimer’s disease increasing rapidly.</p>
+<p>Q3. What are the distinct causes of death in each state in the United States?<br />
+A3: Cancer appears to be a distinct cause of death since the early 2000’s. The southern region displays late and lesser number of cancer cases overall.</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
