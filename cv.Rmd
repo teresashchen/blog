@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE, eval=FALSE}
 # a single file
-xfun::embed_file('Curriculum vitae_Chen_031419.pdf')
+xfun::embed_file('Curriculum vitae_Chen_051319.pdf')
 ```
 
 
