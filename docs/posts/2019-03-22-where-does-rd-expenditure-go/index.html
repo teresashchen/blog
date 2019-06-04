@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-<title>Teresa Chen: How does R&amp;D expenditure changes?</title>
+<title>Teresa Chen: How does R&amp;D expenditure change?</title>
 
 <meta property="description" itemprop="description" content="Funding resources are not looking bright for biomechanists."/>
 
@@ -30,7 +30,7 @@
 <meta name="article:author" content="Teresa Chen"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Teresa Chen: How does R&amp;D expenditure changes?"/>
+<meta property="og:title" content="Teresa Chen: How does R&amp;D expenditure change?"/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="Funding resources are not looking bright for biomechanists."/>
 <meta property="og:locale" content="en_US"/>
@@ -38,14 +38,14 @@
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Teresa Chen: How does R&amp;D expenditure changes?"/>
+<meta property="twitter:title" content="Teresa Chen: How does R&amp;D expenditure change?"/>
 <meta property="twitter:description" content="Funding resources are not looking bright for biomechanists."/>
 
 <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
 <script type="text/json" id="radix-rmarkdown-metadata">
-{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories"]}},"value":[{"type":"character","attributes":{},"value":["How does R&D expenditure changes?"]},{"type":"character","attributes":{},"value":["Funding resources are not looking bright for biomechanists."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Teresa Chen"]},{"type":"character","attributes":{},"value":["https://teresashchen.github.io/blog/"]}]}]},{"type":"character","attributes":{},"value":["03-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]},{"type":"character","attributes":{},"value":["dataviz","rstats","biomechanics"]}]}
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output","categories"]}},"value":[{"type":"character","attributes":{},"value":["How does R&D expenditure change?"]},{"type":"character","attributes":{},"value":["Funding resources are not looking bright for biomechanists."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Teresa Chen"]},{"type":"character","attributes":{},"value":["https://teresashchen.github.io/blog/"]}]}]},{"type":"character","attributes":{},"value":["03-22-2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]},{"type":"character","attributes":{},"value":["dataviz","rstats","biomechanics"]}]}
 </script>
 <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1280,7 +1280,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"How does R&D expenditure changes?","description":"Funding resources are not looking bright for biomechanists.","authors":[{"author":"Teresa Chen","authorURL":"https://teresashchen.github.io/blog/","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-03-22T00:00:00.000-07:00","citationText":"Chen, 2019"}
+{"title":"How does R&D expenditure change?","description":"Funding resources are not looking bright for biomechanists.","authors":[{"author":"Teresa Chen","authorURL":"https://teresashchen.github.io/blog/","affiliation":"&nbsp;","affiliationURL":"#"}],"publishedDate":"2019-03-22T00:00:00.000-07:00","citationText":"Chen, 2019"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1310,7 +1310,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>How does R&amp;D expenditure changes?</h1>
+<h1>How does R&amp;D expenditure change?</h1>
 <p>Funding resources are not looking bright for biomechanists.</p>
 </div>
 
@@ -1335,20 +1335,21 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><a href="#line-graph-2">line graph 2</a></li>
 <li><a href="#cow-plot">Cow plot</a></li>
 </ul></li>
+<li><a href="#interpretation">Interpretation</a></li>
 </ul>
 </nav>
 <hr class="d-toc-separator"/>
-<p>This is one of my participation in <a href="https://github.com/rfordatascience/tidytuesday">#TidyTuesday</a> data visualization challenge. The data/visualization, nevertheless, is highgly related to every researcher. I am interested to know <strong>how R&amp;D expenditure changes over years</strong>. Since I am a biomechanist working in academia, I also want to know <strong>how the funding situation loos like for certain organizations where biomechanists usually get funded</strong>.</p>
+<p>This is one of my <a href="https://github.com/rfordatascience/tidytuesday">#TidyTuesday</a> data visualization challenge. The data/visualization is highgly pertinent to every researcher. I am interested to know <strong>how R&amp;D expenditure changes over the years</strong>. Since I am a biomechanist working in academia, I also want to know <strong>how the funding outlook for certain organizations where biomechanists usually get funded</strong>.</p>
 <aside>
 #TidyTuesday is a weekly event on twitter, where R users can practice their wrangling and data visualization skills with real-world data.
 </aside>
 <h2 id="about-the-data">About the data</h2>
-<p>The original data come from American Association for the Advancement of Science Historical Trends. The dataset I used for datavisualization is a <em>cleaned</em> version, which means I did not have to organize/clean several excel files to get the final dataset. Thanks to R4DS community!</p>
+<p>The original data came from American Association for the Advancement of Science Historical Trends. The dataset I used for data visualization is a <em>cleaned</em> version, which means I did not have to organize and clean several excel files to get to the final dataset. Thanks to th R4DS community!</p>
 <aside>
 Details regarding the data can be found <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-02-12">here</a>.
 </aside>
 <p>Let’s do some #dataviz, shall we?</p>
-<p>Here are packages I used for this data visulization:</p>
+<p>Here are the packages I used for this data visulization:</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 library(tidyverse)
@@ -1366,8 +1367,8 @@ knitr::opts_chunk$set(echo = TRUE)</code></pre>
 fed_rd &lt;- readr::read_csv(&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-12/fed_r_d_spending.csv&quot;)</code></pre>
 </div>
 <h3 id="tidy-the-data">Tidy the data</h3>
-<p>Since I am not familiar with abbreviations of all funding departments, I decide to add their names to the dataset.</p>
-<p>I also devided R&amp;D expenditure to GDP to get funding percentage relative to the yearly economy.</p>
+<p>Since I am not familiar with all the abbreviations that are used in the funding departments, I decide to add their names to the dataset.</p>
+<p>I also devided R&amp;D expenditure by GDP to get the funding percentage relative to the annual economy.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 abbname &lt;- tibble(abb = c(&quot;DOD - Department of Defense&quot;,
@@ -1426,7 +1427,7 @@ ggsave(&quot;plot0.png&quot;, width = 25, height = 10, dpi = 150, units = &quot;
 <p>DoD stands out from all the other agencies to fund more R&amp;D projects, although the percentage is still low relative to GDP.</p>
 <h2 id="data-visualization-2">Data visualization 2</h2>
 <h3 id="line-graph-1">line graph 1</h3>
-<p>Here I focused on graphing percentage R&amp;D expenditure and used <code>{gghightlight}</code> to stand out four departments where biomechanists typically get grant from.</p>
+<p>Here I focused on graphing the percentage of R&amp;D expenditure and used <code>{gghightlight}</code> to make four departments stand out where biomechanists typically get grant from.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # plot line graph with percentage
@@ -1454,7 +1455,7 @@ plot1</code></pre>
 <p><img src="where-does-rd-expenditure-go_files/figure-html5/plot2-1.png" width="1440" /></p>
 </div>
 <h3 id="line-graph-2">line graph 2</h3>
-<p>Instead of using percentage, I plotted R&amp;D expenditure in dollars.</p>
+<p>Instead of using a percentage, I plotted R&amp;D expenditure in dollars.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # plot line graph with dollars
@@ -1482,7 +1483,7 @@ plot2</code></pre>
 <p><img src="where-does-rd-expenditure-go_files/figure-html5/unnamed-chunk-1-1.png" width="1440" /></p>
 </div>
 <h3 id="cow-plot">Cow plot</h3>
-<p>It’s simply a combination plot of line plot 1 and line plot 2. I think putting 2 plots together can make the story more complete. Highly recommend <code>{cowplot}</code> here to make combining plots super straightforward!</p>
+<p>It’s simply a combination plot of line plot 1 and line plot 2. I think putting 2 plots together can make the story more complete. I highly recommend <code>{cowplot}</code> here to make combining plots incredibly straightforward!</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre class="r"><code>
 # comebine 2 line graphs
@@ -1505,7 +1506,8 @@ save_plot(&quot;plot3.png&quot;, plot3,
 plot3</code></pre>
 <p><img src="where-does-rd-expenditure-go_files/figure-html5/unnamed-chunk-2-1.png" width="1440" /></p>
 </div>
-<p>Although the expenditure (money-wise) went up, the percentage relative to GDP went down.</p>
+<h2 id="interpretation">Interpretation</h2>
+<p>Although the expenditure (money-wise) went up, the percentage relative to GDP went down. Funding resources are not looking bright for biomechanists :(</p>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

@@ -1,7 +1,7 @@
 [
   {
     "path": "posts/2019-03-22-where-does-rd-expenditure-go/",
-    "title": "How does R&D expenditure changes?",
+    "title": "How does R&D expenditure change?",
     "description": "Funding resources are not looking bright for biomechanists.",
     "author": [
       {
@@ -16,7 +16,7 @@
       "biomechanics"
     ],
     "preview": "posts/2019-03-22-where-does-rd-expenditure-go/where-does-rd-expenditure-go_files/figure-html5/plot1-1.png",
-    "last_modified": "2019-03-23T00:10:39-07:00"
+    "last_modified": "2019-06-03T23:41:16-07:00"
   },
   {
     "path": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/",
@@ -34,7 +34,7 @@
       "rstats"
     ],
     "preview": "posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png",
-    "last_modified": "2019-03-22T20:29:20-07:00"
+    "last_modified": "2019-06-03T23:13:21-07:00"
   },
   {
     "path": "posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/",

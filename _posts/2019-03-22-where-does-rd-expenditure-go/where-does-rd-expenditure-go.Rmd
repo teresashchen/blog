@@ -1,5 +1,5 @@
 ---
-title: "How does R&D expenditure changes?"
+title: "How does R&D expenditure change?"
 description: |
   Funding resources are not looking bright for biomechanists.
 author:
@@ -17,7 +17,7 @@ categories:
   - biomechanics
 ---
 
-This is one of my participation in [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) data visualization challenge. The data/visualization, nevertheless, is highgly related to every researcher. I am interested to know **how R&D expenditure changes over years**. Since I am a biomechanist working in academia, I also want to know **how the funding situation loos like for certain organizations where biomechanists usually get funded**.
+This is one of my [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) data visualization challenge. The data/visualization is highgly pertinent to every researcher. I am interested to know **how R&D expenditure changes over the years**. Since I am a biomechanist working in academia, I also want to know **how the funding outlook for certain organizations where biomechanists usually get funded**.
 
 <aside>
 #TidyTuesday is a weekly event on twitter, where R users can practice their wrangling and data visualization skills with real-world data.
@@ -26,7 +26,7 @@ This is one of my participation in [#TidyTuesday](https://github.com/rfordatasci
 
 ## About the data
 
-The original data come from American Association for the Advancement of Science Historical Trends. The dataset I used for datavisualization is a *cleaned* version, which means I did not have to organize/clean several excel files to get the final dataset. Thanks to R4DS community!
+The original data came from American Association for the Advancement of Science Historical Trends. The dataset I used for data visualization is a *cleaned* version, which means I did not have to organize and clean several excel files to get to the final dataset. Thanks to th R4DS community!
 
 
 <aside>
@@ -35,7 +35,7 @@ Details regarding the data can be found [here](https://github.com/rfordatascienc
 
 Let's do some #dataviz, shall we?
 
-Here are packages I used for this data visulization:
+Here are the packages I used for this data visulization:
 
 ```{r setup, include=TRUE, echo=TRUE}
 library(tidyverse)
@@ -59,9 +59,9 @@ fed_rd <- readr::read_csv("https://raw.githubusercontent.com/rfordatascience/tid
 
 ### Tidy the data
 
-Since I am not familiar with abbreviations of all funding departments, I decide to add their names to the dataset. 
+Since I am not familiar with all the abbreviations that are used in the funding departments, I decide to add their names to the dataset. 
 
-I also devided R&D expenditure to GDP to get funding percentage relative to the yearly economy.
+I also devided R&D expenditure by GDP to get the funding percentage relative to the annual economy.
 
 ```{r tidydata}
 
@@ -128,7 +128,7 @@ DoD stands out from all the other agencies to fund more R&D projects, although t
 
 ### line graph 1
 
-Here I focused on graphing percentage R&D expenditure and used `{gghightlight}` to stand out four departments where biomechanists typically get grant from. 
+Here I focused on graphing the percentage of R&D expenditure and used `{gghightlight}` to make four departments stand out where biomechanists typically get grant from. 
 
 ```{r plot2, fig.height = 15, fig.width = 15}
 
@@ -159,7 +159,7 @@ plot1
 
 ### line graph 2
 
-Instead of using percentage, I plotted R&D expenditure in dollars.
+Instead of using a percentage, I plotted R&D expenditure in dollars.
 
 ```{r fig.height = 15, fig.width = 15}
 
@@ -189,7 +189,7 @@ plot2
 
 ### Cow plot
 
-It's simply a combination plot of line plot 1 and line plot 2. I think putting 2 plots together can make the story more complete.  Highly recommend `{cowplot}` here to make combining plots super straightforward!
+It's simply a combination plot of line plot 1 and line plot 2. I think putting 2 plots together can make the story more complete. I highly recommend `{cowplot}` here to make combining plots incredibly straightforward!
 
 ```{r fig.height = 15, fig.width = 15}
 
@@ -213,4 +213,6 @@ save_plot("plot3.png", plot3,
 plot3
 ```
 
-Although the expenditure (money-wise) went up, the percentage relative to GDP went down. 
+## Interpretation
+
+Although the expenditure (money-wise) went up, the percentage relative to GDP went down. Funding resources are not looking bright for biomechanists :( 
