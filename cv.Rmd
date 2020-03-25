@@ -1,7 +1,7 @@
 ---
 title: "CV"
 description: |
-  Last updated: May, 2019
+  Last updated: March, 2020
 ---
 
 ```{r setup, include=FALSE, eval=FALSE}
@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r echo=FALSE, eval=FALSE}
 # a single file
-xfun::embed_file('Curriculum vitae_Chen_052319.pdf')
+xfun::embed_file('Curriculum vitae_Chen_Jan2020.pdf')
 ```
 
 
