@@ -4,16 +4,6 @@ description: |
   Last updated: August, 2020
 ---
 
-```{r setup, include=FALSE, eval=FALSE}
-
-# devtools::install_github('yihui/xfun')
-# # embed_file() requires a few more packages
-# xfun::pkg_load2(c('base64enc', 'htmltools', 'mime'))
-
-knitr::opts_chunk$set(echo = TRUE)
-
-```
-
 
 
 <embed src= "Curriculum vitae_Chen_2020Aug.pdf" width= "800" height= "1000">
