@@ -15,11 +15,5 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r echo=FALSE, eval=FALSE}
-# a single file
-xfun::embed_file('Curriculum vitae_Chen_2020Aug.pdf')
-```
 
-
-
-<embed src= "Curriculum vitae_Chen_Jan2020.pdf" width= "800" height= "1000">
+<embed src= "Curriculum vitae_Chen_2020Aug.pdf" width= "800" height= "1000">
