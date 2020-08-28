@@ -4,6 +4,9 @@ description: |
   Last updated: August, 2020
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
+<img src="Curriculum vitae_Chen_2020Aug.pdf" alt="TC's CV"  width="1000" height="1200">
 
-<embed src= "Curriculum vitae_Chen_2020Aug.pdf" width= "800" height= "1000">
