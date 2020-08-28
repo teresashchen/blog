@@ -1,5 +1,5 @@
 ---
-title: "a physical therapist's #dataviz practice"
+title: "Educate, Empower, Explore."
 site: distill::distill_website
 listing: posts
 ---

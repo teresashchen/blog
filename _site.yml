@@ -1,7 +1,7 @@
-name: "11_Blog"
-title: "Teresa Chen"
+name: "TC"
+title: "Szu-Hua Teresa Chen"
 description: |
-  Teresa's Blog
+  Educate, Empower, Explore.
 output_dir: "docs"
 navbar:
   right:
@@ -11,7 +11,7 @@ navbar:
       href: about.html
     - text: "CV"
       href: cv.html
-    - text: "Google Scholar"
+    - text: "Google Scholar" 
       href: https://scholar.google.com/citations?user=rFt2sb4AAAAJ&hl=en      
     - icon: fa fa-github
       href: https://github.com/teresashchen

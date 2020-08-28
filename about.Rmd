@@ -11,13 +11,19 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ### Hi, I am Teresa Chen!  
 
-I am a PhD candidate in Human Physiology at the University of Oregon. I joined the Motion Analysis Lab in 2015. As a physical therapist, I aim to develop a career in the direction of mobility impairment research with translational applications to patient care or exercise performance. My current research, specifically, focuses on age-related declines in cognitive and physical functions and their contributions to gait imbalance and falls and, ultimately, to lead to new rehabilitation interventions.
+I joined the Department of Physical Therapy at Ithaca College as an Assistant Professor in August, 2020. I received my education in Physical Therapy at the [National Taiwan University](https://www.mc.ntu.edu.tw/ntupt/Index.action) and PhD degree in [Human Physiology](https://physiology.uoregon.edu/) at the University of Oregon with a focus on biomechanics.   
 
-My favorite sports is Olympic weight lifting, inspired by [her](https://en.wikipedia.org/wiki/Kuo_Hsing-chun) and all the other weightlifters I had been working with. I also like running, travling and trying all kinds of #dataviz & #rstats. 
+I aims to develop a career in the direction of mobility impairment research with translational applications to patient care and exercise performance. Currently, my research interest focuses on age-related and injury-induced declines in cognitive and physical functions and their contributions to gait imbalance and falls as well as on the impact-induced sports injuries, ultimately leading to new rehabilitation examination and interventions.  
+
+Prior to doctoral training, I worked alongside Olympic weightlifters as a physical therapist. I found this job challenging yet satisfying through implementing preventive programs, developing and carrying out rehabilitation programs, and assisting in international meets for elite athletes. The best part was that I had the opportunity to travel to different countries and witness some of the greatest competitions in the world.  
+
+Inspired by [my athletes](https://en.wikipedia.org/wiki/Kuo_Hsing-chun), I enjoy weightlifting during her free time. I also like to run, hike, watch movies, discover new places to eat and keep exploring new interests. After immersing meself in Eugene’s ever-changing beauty and outdoor activities, I cannot wait to explore the waterfalls and trails in Ithaca!
+
+
 
 ### Contact
 
-Feel free to contact me via [email](mailto:szuhuac@uoregon.edu)
+Feel free to contact me via [email at schen3@ithaca.edu](mailto:schen3@ithaca.edu)
 
 ### About this blog
 
