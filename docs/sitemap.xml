@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://teresashchen.github.io/blog/about.html</loc>
+    <lastmod>2020-09-02T12:13:59-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/cv.html</loc>
+    <lastmod>2020-08-28T04:29:12-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/</loc>
+    <lastmod>2020-08-28T02:38:42-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/LICENSE.html</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/posts/2019-03-22-where-does-rd-expenditure-go/</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+  <url>
+    <loc>https://teresashchen.github.io/blog/posts/welcome/</loc>
+    <lastmod>2020-03-25T10:25:44-04:00</lastmod>
+  </url>
+</urlset>

@@ -1,11 +1,16 @@
 name: "TC"
-title: "Szu-Hua Teresa Chen"
+title: "Szu-Hua Teresa Chen, PT, PhD"
 description: |
   Educate, Empower, Explore.
 output_dir: "docs"
+base_url: https://teresashchen.github.io/blog/
+google_analytics: "UA-56479075-2"
+favicon: images/logo_black.png
+creative_commons: CC BY-NC
 navbar:
+  logo: images/logo_circle2.png
   right:
-    - text: "Home"
+    - icon: fa fa-home
       href: index.html
     - text: "About"
       href: about.html

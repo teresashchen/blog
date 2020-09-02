@@ -1,7 +1,7 @@
 ---
 title: "Welcome!"
 description: |
-  Something about me and my blog 
+  Hi, I am Teresa Chen!
 ---
 
 ```{r setup, include=FALSE}
@@ -9,15 +9,29 @@ knitr::opts_chunk$set(echo = FALSE)
 ```
 
 
-### Hi, I am Teresa Chen!  
 
-I joined the Department of Physical Therapy at Ithaca College as an Assistant Professor in August, 2020. I received my education in Physical Therapy at the [National Taiwan University](https://www.mc.ntu.edu.tw/ntupt/Index.action) and PhD degree in [Human Physiology](https://physiology.uoregon.edu/) at the University of Oregon with a focus on biomechanics.   
+```{r fig.align = 'center', out.height="50%", out.width="50%"}
+knitr::include_graphics(here::here("images", "teresainor.jpeg"))
+```
 
-I aims to develop a career in the direction of mobility impairment research with translational applications to patient care and exercise performance. Currently, my research interest focuses on age-related and injury-induced declines in cognitive and physical functions and their contributions to gait imbalance and falls as well as on the impact-induced sports injuries, ultimately leading to new rehabilitation examination and interventions.  
 
+
+I am an Assistant Professor in the Department of Physical Therapy at the Ithaca College. Prior to this position, I am a Graduate Employee at the University of Oregon, where I received my PhD degree in the [Department of Human Physiology](https://physiology.uoregon.edu/) with a focus on biomechanics and motor control.   
+  
+  
+I am originally from Taiwan, so I speak mandarin and Taiwanese while using English as my primarily working language. I have been a physical therapist since 2010 when I finished my education in Physical Therapy at the [National Taiwan University](https://www.mc.ntu.edu.tw/ntupt/Index.action). 
+  
+  
 Prior to doctoral training, I worked alongside Olympic weightlifters as a physical therapist. I found this job challenging yet satisfying through implementing preventive programs, developing and carrying out rehabilitation programs, and assisting in international meets for elite athletes. The best part was that I had the opportunity to travel to different countries and witness some of the greatest competitions in the world.  
-
-Inspired by [my athletes](https://en.wikipedia.org/wiki/Kuo_Hsing-chun), I enjoy weightlifting during her free time. I also like to run, hike, watch movies, discover new places to eat and keep exploring new interests. After immersing meself in Eugene’s ever-changing beauty and outdoor activities, I cannot wait to explore the waterfalls and trails in Ithaca!
+  
+  
+My zeal and devotion for teaching stem early on in my education years. As a first-generation student, I always appreciate those who went above and beyond to make sure I felt belonged and included. The experience of being around role models paved my way to become an educational advocate and reinforced my teaching philosophy with emphasis of diversity, inclusion and equity. Through 9 years of teaching experience across classrooms, laboratory, clinics, sports field, and cadaver rooms, I am proud to become one of many educators who see students as an individual and values that diversity is not limited to what the human eye can see. 
+  
+   
+As far as my research agenda, I aim to develop a career in the direction of mobility impairment research with transnational applications to patient care and exercise performance. Currently, my research interest focuses on age-related declines in cognitive and physical functions and their contributions to gait imbalance and falls. I have also been involved in several projects that investigate the impact-induced sports injuries with a goal of leading to new rehabilitation examination and interventions.  
+  
+  
+Inspired by [my athletes](https://en.wikipedia.org/wiki/Kuo_Hsing-chun), I enjoy weightlifting during her free time. I also like to run, hike, watch movies, discover new places to eat and keep exploring new interests. After immersing myself in Eugene’s ever-changing beauty and outdoor activities, I cannot wait to explore the waterfalls and trails in Ithaca!
 
 
 
@@ -25,13 +39,19 @@ Inspired by [my athletes](https://en.wikipedia.org/wiki/Kuo_Hsing-chun), I enjoy
 
 Feel free to contact me via [email at schen3@ithaca.edu](mailto:schen3@ithaca.edu)
 
-### About this blog
+
+### Update
 
 --------------------------------------------------------------------------------------------
 Time                Milestone
 ------------------  -------------------------------------------------------------------------
-  March, 2019       Final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/) is done!
+  November, 2019    I defended my PhD project! 
+  
+  March, 2019       Final project in [Communicating and Transforming Data](https://github.com/uo-datasci-specialization) is done. I decided to continue this site and used it to host my personal website `r emo::ji("smile")`
 
-  Febrary, 2019     This blog is created with a purpose of fullfill one of the requirment of class final project in [Communicating and Transforming Data](https://uo-datasci-specialization.github.io/c2-communicate_transform_data/).
+  February, 2019    The birth of this blog. It was first created with a purpose of fulfilling the final project in the class of [Communicating and Transforming Data](https://github.com/uo-datasci-specialization).
 -------------------------------------------------------------
 
+## Last updated {.appendix}
+
+September, 2020

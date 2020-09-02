@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Szu-Hua Teresa Chen, PT, PhD</title>
+    <link>https://teresashchen.github.io/blog/</link>
+    <atom:link href="https://teresashchen.github.io/blog/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Educate, Empower, Explore.
+</description>
+    <image>
+      <title>Szu-Hua Teresa Chen, PT, PhD</title>
+      <url>https://teresashchen.github.io/blog/images/logo_black.png</url>
+      <link>https://teresashchen.github.io/blog/</link>
+    </image>
+    <generator>Distill</generator>
+    <lastBuildDate>Fri, 22 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>How does R&amp;D expenditure change?</title>
+      <dc:creator>Teresa Chen</dc:creator>
+      <link>https://teresashchen.github.io/blog/posts/2019-03-22-where-does-rd-expenditure-go</link>
+      <description>Funding resources are not looking bright for biomechanists.</description>
+      <category>dataviz</category>
+      <category>rstats</category>
+      <category>biomechanics</category>
+      <guid>https://teresashchen.github.io/blog/posts/2019-03-22-where-does-rd-expenditure-go</guid>
+      <pubDate>Fri, 22 Mar 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://teresashchen.github.io/blog/posts/2019-03-22-where-does-rd-expenditure-go/where-does-rd-expenditure-go_files/figure-html5/plot1-1.png" medium="image" type="image/png" width="4800" height="1920"/>
+    </item>
+    <item>
+      <title>Distinct causes of death in each state of the United States</title>
+      <dc:creator>Teresa Chen</dc:creator>
+      <link>https://teresashchen.github.io/blog/posts/2019-03-14-cause-of-death-gganimate-with-geographical-data</link>
+      <description>Cause of Death- {gganimate} with Geographical Data</description>
+      <category>dataviz</category>
+      <category>rstats</category>
+      <guid>https://teresashchen.github.io/blog/posts/2019-03-14-cause-of-death-gganimate-with-geographical-data</guid>
+      <pubDate>Thu, 14 Mar 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://teresashchen.github.io/blog/posts/2019-03-14-cause-of-death-gganimate-with-geographical-data/cause-of-death-gganimate-with-geographical-data_files/figure-html5/plot3-1.png" medium="image" type="image/png" width="4800" height="6720"/>
+    </item>
+    <item>
+      <title>Changing patterns of leading causes of death over time</title>
+      <dc:creator>Teresa Chen</dc:creator>
+      <link>https://teresashchen.github.io/blog/posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph</link>
+      <description>Cause of Death- {gghighlight} with a Line Graph</description>
+      <category>dataviz</category>
+      <category>rstats</category>
+      <guid>https://teresashchen.github.io/blog/posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph</guid>
+      <pubDate>Tue, 12 Mar 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://teresashchen.github.io/blog/posts/2019-03-12-cause-of-death-gghighlight-with-a-line-graph/cause-of-death-gghighlight-with-a-line-graph_files/figure-html5/plot2_v3-1.png" medium="image" type="image/png" width="1920" height="1536"/>
+    </item>
+    <item>
+      <title>How do causes of death change from 1999 to 2016?</title>
+      <dc:creator>Teresa Chen</dc:creator>
+      <link>https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph</link>
+      <description>Cause of Death- {gganimate} with a Bar Graph</description>
+      <category>dataviz</category>
+      <category>rstats</category>
+      <guid>https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph</guid>
+      <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://teresashchen.github.io/blog/posts/2019-03-08-cause-of-death-gganimate-with-a-bar-graph/cause-of-death-gganimate-with-a-bar-graph_files/figure-html5/plot1_v4_preview-1.png" medium="image" type="image/png" width="2304" height="1920"/>
+    </item>
+    <item>
+      <title>Welcome to Teresa's Blog</title>
+      <dc:creator>Teresa Chen</dc:creator>
+      <link>https://teresashchen.github.io/blog/posts/welcome</link>
+      <description>Welcome to our new blog, Teresa's Blog. We hope you enjoy 
+reading what we have to say!</description>
+      <guid>https://teresashchen.github.io/blog/posts/welcome</guid>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
